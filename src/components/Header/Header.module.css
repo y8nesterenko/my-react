@@ -1,0 +1,12 @@
+.header {
+   grid-area: header;
+   display: flex;
+   align-items: center;
+   border: 1px solid #000;
+   background-color: rgb(66, 97, 19);
+ }
+ 
+ .header img {
+   max-width: 60px;
+   margin-left: 5px;
+ }

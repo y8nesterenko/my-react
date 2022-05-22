@@ -1,0 +1,23 @@
+.nav {
+   grid-area: nav;
+   border: 1px solid #000;
+   background-color: skyblue;
+ }
+ 
+ .nav a {
+   display: block;
+   margin-left: 5px;
+ }
+
+ .item {
+   color: #fff;
+   text-decoration: none;
+ }
+
+ .item:hover {
+  text-decoration: underline;
+}
+
+.active {
+  color: gold;
+}

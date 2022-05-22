@@ -1,0 +1,25 @@
+.app-wrapper {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "nav content";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 1fr 5fr;
+  grid-gap: 10px;
+  margin: 10px;
+}
+
+.app-wrapper-content {
+  background-color: burlywood;
+  color: #fff;
+  }
+
+.income {
+  min-height: 50px;
+  width: 250px;
+  align-items: center;
+  text-align: left;
+  border: 1px solid transparent;
+  color: white;
+  background-color: aqua;
+}

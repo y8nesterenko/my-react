@@ -1,0 +1,50 @@
+.content__image img {
+  height: 140px;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.user__logo img {
+  max-height: 200px;
+  margin: 10px;
+}
+
+.user {
+  display: flex;
+}
+
+.user__info {}
+
+.user__name {
+  padding-top: 10px;
+}
+
+ul.user__info {
+  padding-left: 0px;
+}
+
+.user__info li {
+  list-style-type: none;
+}
+
+textarea.posts__text {
+  width: 98.5%;
+  margin-left: 10px;
+}
+
+.posts__title {
+  margin-left: 10px;
+}
+
+.posts__button {
+  text-align: right;
+}
+
+.posts__button button {
+  background-color: green;
+  font-size: 25px;
+  color: #fff;
+  margin: 0 10px 10px 0;
+}

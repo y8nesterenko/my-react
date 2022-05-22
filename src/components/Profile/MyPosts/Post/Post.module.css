@@ -1,0 +1,29 @@
+.post {
+  color: green;
+  display: flex;
+
+}
+
+.post p {
+margin: 10px 15px;
+text-align: justify;
+flex: 0 1 auto;
+}
+
+.post img {
+  flex: 0 0 100px;
+  height: 100px;
+  margin: 10px 0 10px 10px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.button {
+  text-align: right;
+  margin-right: 10px;
+  }
+
+.button button {
+background-color: red;
+color: #fff;
+}
