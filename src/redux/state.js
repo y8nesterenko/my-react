@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+import newsReducer from "./news-reducer";
 
 let store = {
     _state: {
@@ -125,36 +124,10 @@ let store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-
-        if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                like: 0,
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            //Текст нового поста приходит нам из екшена (поля ввода пользователем)
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            //Создаём объект, который будем добавлять в массив
-            let newMessage = {
-                id: 10,
-                message: this._state.messagesPage.newMessageText,
-                type: 'outcome',
-            };
-            //Пушим (добавляем) созданный объект в массив
-            this._state.messagesPage.messages.push(newMessage);
-            //Зануляем содержимое поля ввода
-            this._state.messagesPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.messagesPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action);
+        this._state.newsPage = newsReducer(this._state.newsPage, action);
+        this._callSubscriber(this._state);
 
         /*равноценная запись через Switch
 
@@ -176,23 +149,6 @@ let store = {
         */
     },
 };
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    };
-};
-// Равнозначная запись
-//export const addPostActionCreator = () => ({type: ADD_POST});
-
-export const addNewPostTextActionCreator = (text) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text
-    };
-};
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-export const addNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text});
 
 export default store;
 window.store = store;
