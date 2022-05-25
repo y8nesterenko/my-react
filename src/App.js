@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
@@ -18,14 +17,14 @@ const App = (props) => {
 
             <div className='app-wrapper'>
                 <Header/>
-                <Navbar friends={props.store.getState().messagesPage.dialogs}/>
+                <Navbar />
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='' element={<Profile store={props.store} />}/>
-                        <Route path='/profile' element={<Profile store={props.store}/>}/>
-                        <Route path='/dialogs' element={<DialogsContainer store={props.store} />}/>
+                        <Route path='' element={<Profile />}/>
+                        <Route path='/profile' element={<Profile />}/>
+                        <Route path='/dialogs' element={<DialogsContainer />}/>
                         {/*<Route path='/music' element={<Music text="Здесь будет музыка"/>}/>*/}
-                        <Route path='/news' element={<News news={props.store.getState().newsPage.news}/>}/>
+                        {/*<Route path='/news' element={<News news={props.store.getState().newsPage.news}/>}/>*/}
                         {/*<Route path='/friends' element={<Friends movies={props.state.moviesPage.movies}/>}/>*/}
                         {/*<Route path='/settings' element={<Settings settings={props.state.settingsPage.settings}/>}/>*/}
                     </Routes>

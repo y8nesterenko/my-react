@@ -4,15 +4,15 @@ import {NavLink} from "react-router-dom";
 
 const Navbar = (props) => {
 
-    let friendsElements = props.friends.map(
-        (friendsData) => {
-            return (
-                <div>{friendsData.name}
-                <img src={friendsData.avatar}/>
-                </div>
-            )
-        }
-    )
+    // let friendsElements = props.friends.map(
+    //     (friendsData) => {
+    //         return (
+    //             <div>{friendsData.name}
+    //             <img src={friendsData.avatar}/>
+    //             </div>
+    //         )
+    //     }
+    // )
 
     return (
         <nav className={style.nav}>
@@ -35,11 +35,11 @@ const Navbar = (props) => {
             </NavLink>
 
                 <br/>
-            <NavLink to='/friends'
-                     className={navData => navData.isActive ? style.active : style.item}>
-                Friends
-                <div>{friendsElements}</div>
-            </NavLink>
+            {/*<NavLink to='/friends'*/}
+            {/*         className={navData => navData.isActive ? style.active : style.item}>*/}
+            {/*    Friends*/}
+            {/*    <div>{friendsElements}</div>*/}
+            {/*</NavLink>*/}
         </nav>
     );
 }
