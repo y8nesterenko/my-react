@@ -66,6 +66,12 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
+
+    let stateCopy = {
+        ...state,
+    };
+
+
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
@@ -74,13 +80,13 @@ const dialogsReducer = (state = initialState, action) => {
                 type: 'outcome',
             };
             //Пушим (добавляем) созданный объект в массив
-            state.messages.push(newMessage);
+            stateCopy.messages.push(newMessage);
             //Зануляем содержимое поля ввода
-            state.newMessageText = '';
-            return state;
+            stateCopy.newMessageText = '';
+            return stateCopy;
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newMessage;
-            return state;
+            stateCopy.newMessageText = action.newMessage;
+            return stateCopy;
         default:
             return state;
     }
