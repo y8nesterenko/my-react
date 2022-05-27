@@ -16,37 +16,24 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
-    let stateCopy = {
-        ...state,
-        posts: [...state.posts],
-        newPostText: {...state.newPostText},
-    };
-
     switch(action.type) {
-        case ADD_POST:
-            let newPost = {
-                id: 5,
-                message: state.newPostText,
-                like: 0,
-            };
-            stateCopy.posts.push(newPost);
-            stateCopy.newPostText = '';
-            return stateCopy;
         case UPDATE_NEW_POST_TEXT:
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
+            return {
+                ...state,
+                newPostText: action.newText,
+            };
+        case ADD_POST:
+            return {
+                ...state,
+                posts: [...state.posts,
+                    {id: 5, message: state.newPostText, like: 0,},
+                ],
+                newPostText: '',
+            };
         default:
             return state;
     }
 };
-
-export const addPostActionCreator = () => {
-    return {
-        type: ADD_POST
-    };
-};
-// Равнозначная запись
-//export const addPostActionCreator = () => ({type: ADD_POST});
 
 export const addNewPostTextActionCreator = (text) => {
     return {
@@ -54,5 +41,9 @@ export const addNewPostTextActionCreator = (text) => {
         newText: text
     };
 };
+
+//аналогична запись другого ActionCreatora с синтаксисом в одну строчку
+export const addPostActionCreator = () => ({type: ADD_POST});
+
 
 export default profileReducer;
