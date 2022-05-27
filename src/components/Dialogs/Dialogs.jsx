@@ -8,10 +8,10 @@ const Dialogs = (props) => {
     let state = props.messagesPage;
 
     let dialogsElements = state.dialogs.map(
-        (dialog) => <DialogItem id={dialog.id} name={dialog.name} avatar={dialog.avatar} /> );
+        (dialog) => <DialogItem id={dialog.id} key={dialog.id} name={dialog.name} avatar={dialog.avatar} /> );
 
     let messagesElements = state.messages.map(
-        (message) => <Message message={message.message} type={message.type}/> );
+        (message) => <Message message={message.message} key={message.id} type={message.type}/> );
 
     let addText = () => {
         props.addText();

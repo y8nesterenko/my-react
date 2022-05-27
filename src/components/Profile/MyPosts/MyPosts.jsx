@@ -5,7 +5,7 @@ import style from './MyPosts.module.css';
 const MyPosts = (props) => {
 
     let postsElements = props.posts.map(
-        (post) => <Post like={post.like} message={post.message} id={post.id}/>);
+        (post) => <Post like={post.like} message={post.message} key={post.id} id={post.id}/>);
 
     let newPostElement = React.createRef();
 
