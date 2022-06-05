@@ -9,6 +9,7 @@ import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import FriendsContainer from "./components/Friends/FriendsContainer";
 
 
 const App = (props) => {
@@ -23,9 +24,9 @@ const App = (props) => {
                         <Route path='' element={<Profile />}/>
                         <Route path='/profile' element={<Profile />}/>
                         <Route path='/dialogs' element={<DialogsContainer />}/>
+                        <Route path='/friends' element={<FriendsContainer/>}/>
                         {/*<Route path='/music' element={<Music text="Здесь будет музыка"/>}/>*/}
                         {/*<Route path='/news' element={<News news={props.store.getState().newsPage.news}/>}/>*/}
-                        {/*<Route path='/friends' element={<Friends movies={props.state.moviesPage.movies}/>}/>*/}
                         {/*<Route path='/settings' element={<Settings settings={props.state.settingsPage.settings}/>}/>*/}
                     </Routes>
                 </div>

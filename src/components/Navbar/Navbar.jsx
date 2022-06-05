@@ -22,6 +22,9 @@ const Navbar = (props) => {
             <NavLink to='/dialogs'
                      className={navData => navData.isActive ? style.active : style.item}>Messages
             </NavLink>
+            <NavLink to='/friends' className={navData => navData.isActive ? style.active : style.item}>
+                Friends
+            </NavLink>
             <NavLink to='/news'
                      className={navData => navData.isActive ? style.active : style.item}>News
             </NavLink>
@@ -35,11 +38,7 @@ const Navbar = (props) => {
             </NavLink>
 
                 <br/>
-            {/*<NavLink to='/friends'*/}
-            {/*         className={navData => navData.isActive ? style.active : style.item}>*/}
-            {/*    Friends*/}
-            {/*    <div>{friendsElements}</div>*/}
-            {/*</NavLink>*/}
+
         </nav>
     );
 }
