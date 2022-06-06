@@ -58,9 +58,10 @@ import userPhoto from '../../assets/images/user.png';
 //классовая компонента
 class Friends extends React.Component {
 
-    constructor(props) {
-        super(props);
-
+    //contructor можно не писать, если он просто передаёт пропсы родителю (super'у). Он это делает по умолчанию
+    //constructor(props) {
+        //super(props);}
+    componentDidMount() {
         if (this.props.friends.length === 0) {
             //говорим "Аксиос, дай мне данныепо такой-то ссылке
             axios.get('https://social-network.samuraijs.com/api/1.0/users')
@@ -72,7 +73,7 @@ class Friends extends React.Component {
                     this.props.setUsers(response.data.items)
                 });
         }
-    }
+            }
 
 
     //props'ы сюда не приходят
