@@ -1,4 +1,4 @@
-.wrapper span {
+.wrapper .title {
     margin-bottom: 20px;
     color: #000;
     text-align: center;
@@ -43,6 +43,23 @@ text-align: right;
 .info__row {
 
 }
+
+.selectedPage {
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.pagination {
+    width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+button {
+cursor: pointer;
+}
+
 
 .showMore {
     padding: 10px;

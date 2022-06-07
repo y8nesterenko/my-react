@@ -1,11 +1,17 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 
 let initialState = {
     friends: [
 
     ],
+    //лучше не использовать размер порции ответа с сервера по умолчанию, потому что он может меняться. Поэтому его нужно зафиксировать самостоятельно
+    pageSize: 5,
+    totalFriendsCount: 0,
+    currentPage: 1,
 };
 
 const friendsReducer = (state = initialState, action) => {
@@ -39,7 +45,22 @@ const friendsReducer = (state = initialState, action) => {
             //копируем старый стейт, массив друзей в нём, и добавляем туда друзей, которые прийдут из экшена
             return {
                 ...state,
-                friends: [...state.friends, ...action.friends]
+                //не добавляем юзеров, которые пришли из экшена в конец массива, а перезаписываем уже имеющийся массив
+                friends: action.friends
+            };
+
+            //меняем значение текущей страницы (currentPage). Номер страницы приходит из экшена
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage,
+            };
+
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                //делаем копию state'а и подменяем то свойство, которое нужно подменить
+                ...state,
+                totalFriendsCount: action.count,
             };
 
         default:
@@ -51,6 +72,8 @@ export const followActionCreator = (userId) => ({type: FOLLOW, userId});
 // let action = { type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text};
 export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId});
 export const setUsersActionCreator = (friends) => ({type: SET_USERS, friends});
+export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 
 
 export default friendsReducer;
