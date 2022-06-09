@@ -76,14 +76,14 @@ const friendsReducer = (state = initialState, action) => {
             return state;
     }
 };
-export const followActionCreator = (userId) => ({type: FOLLOW, userId});
+export const follow = (userId) => ({type: FOLLOW, userId});
 //ActionCreator создаётся вместо отдельного объекта action:
 // let action = { type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text};
-export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId});
-export const setUsersActionCreator = (friends) => ({type: SET_USERS, friends});
-export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
-export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+export const setUsers = (friends) => ({type: SET_USERS, friends});
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
+export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 
 export default friendsReducer;

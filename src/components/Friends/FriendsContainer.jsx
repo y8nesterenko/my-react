@@ -2,13 +2,12 @@ import React from "react";
 import Friends from "./Friends";
 import {connect} from "react-redux";
 import {
-    followActionCreator,
-    setCurrentPageAC, setTotalUsersCountAC,
-    setUsersActionCreator, toggleIsFetchingAC,
-    unfollowActionCreator
+    follow,
+    setCurrentPage, setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow
 } from "../../redux/friends-reducer";
 import * as axios from "axios";
-import preloader from "../../assets/images/preloader.svg";
 import Preloader from "../common/Preloader";
 
 //классовая компонента
@@ -91,28 +90,28 @@ let mapStateToProps = (state) => {
         isFetching: state.friendsPage.isFetching,
     }
 };
+//
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         follow: (userId) => {
+//         dispatch(followActionCreator(userId))
+//         },
+//         unfollow: (userId) => {
+//             dispatch(unfollowActionCreator(userId))
+//         },
+//         setUsers: (friends) => {
+//             dispatch(setUsersActionCreator(friends))
+//         },
+//         setCurrentPage: (pageNumber) => {
+//           dispatch(setCurrentPageAC(pageNumber))
+//         },
+//         setTotalUsersCount: (totalCount) => {
+//             dispatch(setTotalUsersCountAC(totalCount))
+//         },
+//         toggleIsFetching: (isFetching) => {
+//             dispatch(toggleIsFetchingAC(isFetching))
+//         },
+//     }
+// };
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        follow: (userId) => {
-        dispatch(followActionCreator(userId))
-        },
-        unfollow: (userId) => {
-            dispatch(unfollowActionCreator(userId))
-        },
-        setUsers: (friends) => {
-            dispatch(setUsersActionCreator(friends))
-        },
-        setCurrentPage: (pageNumber) => {
-          dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FriendsContainer);
+export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(FriendsContainer);
