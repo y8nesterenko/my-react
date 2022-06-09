@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
     friends: [
@@ -12,6 +13,8 @@ let initialState = {
     pageSize: 5,
     totalFriendsCount: 0,
     currentPage: 1,
+    //значение, говорящее идёт ли запрос данных на сервере
+    isFetching: false,
 };
 
 const friendsReducer = (state = initialState, action) => {
@@ -63,6 +66,12 @@ const friendsReducer = (state = initialState, action) => {
                 totalFriendsCount: action.count,
             };
 
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching,
+            };
+
         default:
             return state;
     }
@@ -74,6 +83,7 @@ export const unfollowActionCreator = (userId) => ({type: UNFOLLOW, userId});
 export const setUsersActionCreator = (friends) => ({type: SET_USERS, friends});
 export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
+export const toggleIsFetchingAC = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 
 export default friendsReducer;
