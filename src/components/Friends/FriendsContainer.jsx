@@ -22,7 +22,6 @@ class FriendsContainer extends React.Component {
         //перед запросом меняем состояние isFetching на true, чтобы загрузился preloader
         this.props.toggleIsFetching(true);
 
-        if (this.props.friends.length === 0) {
             //говорим "Аксиос, дай мне данныепо такой-то ссылке
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
                 //когда будет ответ, выполняем логику (функцию)
@@ -39,7 +38,7 @@ class FriendsContainer extends React.Component {
                     this.props.setTotalUsersCount(response.data.totalCount);
 
                 });
-        }
+
     }
 
     //метод для запроса на сервер при клике на текущию страницу массива пользователей

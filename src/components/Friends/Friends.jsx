@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './Friends.module.css';
 import userPhoto from '../../assets/images/user.png';
+import {NavLink} from "react-router-dom";
 
 
 //функциональная компонента
@@ -90,8 +91,12 @@ const Friends = (props) => {
                 <div className={style.header}></div>
                 <div className={style.body}>
                     <div className={style.avatar}>
+
+                        {/*Оборачиваем картинку пользователя ссылкой для перехода на его профиль*/}
+                        <NavLink to={'/profile/' + friends.id}>
                         <img src={friends.photos.small != null ? friends.photos.small : userPhoto}/>
-                        {friends.followed
+                        </NavLink>
+                            {friends.followed
                             ? <button onClick={() => {
                                 props.unfollow(friends.id)
                             }}>Unfollow</button>

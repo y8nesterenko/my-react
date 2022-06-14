@@ -1,7 +1,14 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
+import Preloader from "../common/Preloader";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+
+   //если профиля нет (null или undefined)
+   if (!props.profile) {
+      return <Preloader />
+   }
+
    return (
       <div>
          <div className={style.content__image}>
@@ -9,13 +16,14 @@ const ProfileInfo = () => {
          <div className={style.user}>
             <div className={style.user__column}>
                <div className={style.user__logo}>
-                  <img src='https://www.meme-arsenal.com/memes/07d24807827e03c1af085fa5f69abe0e.jpg' />
+                  <img src={props.profile.photos.small}/>
+                  {/*<img src='https://www.meme-arsenal.com/memes/07d24807827e03c1af085fa5f69abe0e.jpg' />*/}
                </div>
             </div>
             <div className={style.user__column}>
-               <div className={style.user__name}>Yurii Nesterenko</div>
+               <div className={style.user__name}>{props.profile.fullName}</div>
                <ul className={style.user__info}>
-                  <li>Date of birth: September 22</li>
+                  <li>About Me: {props.profile.aboutMe}</li>
                   <li>City: Kyiv</li>
                   <li>Education: Internet</li>
                   <li>Web-site: <a href='http://test.inf.ua' target="blank">test.inf.ua</a></li>

@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     posts: [
@@ -13,6 +14,8 @@ let initialState = {
         {id: 8, message: "Это мой восьмой пост", like: 800},
     ],
     newPostText: '',
+    //изначально у нас профайл не проинициализировался (профиля пока нет)
+    profile: null,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -30,6 +33,13 @@ const profileReducer = (state = initialState, action) => {
                 ],
                 newPostText: '',
             };
+        case SET_USER_PROFILE:
+            return {
+                //сделаем копию стейта и поменяет профайл на профайл, который придёт из экшена
+                ...state,
+                profile: action.profile,
+            };
+
         default:
             return state;
     }
@@ -45,5 +55,7 @@ export const addNewPostTextActionCreator = (text) => {
 //аналогична запись другого ActionCreatora с синтаксисом в одну строчку
 export const addPostActionCreator = () => ({type: ADD_POST});
 
+//сюда будет приходить профайл, и в экшене будет сидеть сам профайл
+export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export default profileReducer;

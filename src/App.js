@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
 import {Routes, Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import News from "./components/News/News";
 import Friends from "./components/Friends/Friends";
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const App = (props) => {
@@ -21,8 +21,10 @@ const App = (props) => {
                 <Navbar />
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='' element={<Profile />}/>
-                        <Route path='/profile' element={<Profile />}/>
+                        {/*<Route path='' element={<ProfileContainer />}/>*/}
+
+                        {/*через двоеточие в пути обозначаем параметр*/}
+                        <Route path='/profile/:userId' element={<ProfileContainer />}/>
                         <Route path='/dialogs' element={<DialogsContainer />}/>
                         <Route path='/friends' element={<FriendsContainer/>}/>
                         {/*<Route path='/music' element={<Music text="Здесь будет музыка"/>}/>*/}
