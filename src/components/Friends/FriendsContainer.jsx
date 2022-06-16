@@ -23,7 +23,10 @@ class FriendsContainer extends React.Component {
         this.props.toggleIsFetching(true);
 
             //говорим "Аксиос, дай мне данныепо такой-то ссылке
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+                //Добавляем второй параметр, чтобы делать запрос за пользователями не анонимно
+                //,{withCredentials: true}
+            )
                 //когда будет ответ, выполняем логику (функцию)
                 .then(response => {
 
@@ -48,7 +51,10 @@ class FriendsContainer extends React.Component {
         this.props.toggleIsFetching(true);
         //делаем запрос на сервер за новой порцией данных о юзерах при изменении текущего номера страницы
         //в пропсах на момент клика будет старый currentPage. Поэтому вместо него указываем pageNumber, по которуму кликаем
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+            //Добавляем второй параметр, чтобы делать запрос за пользователями не анонимно
+            //, {withCredentials: true}
+        )
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
