@@ -100,7 +100,11 @@ const Friends = (props) => {
                                 <img src={friends.photos.small != null ? friends.photos.small : userPhoto}/>
                             </NavLink>
                             {friends.followed
-                                ? <button onClick={() => {
+                                //кнопка дисейблится если в массиве хоть одна айдишка равна айдишке пользователя
+                                ? <button disabled={props.followingInProgress.some (id => id === friends.id)} onClick={() => {
+                                    //перед асинхронным запросом мы диспатчим true (что у нас запрос в процессе), чтобы дисейблить нкопку
+                                    props.toggleFollowingProgress(true, friends.id);
+
                                     //для отписки делаем delete-запрос. В delete-запросе withCredentials идёт вторым параметром, как и в get-запросе
                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`,
                                         {withCredentials: true},
@@ -116,9 +120,13 @@ const Friends = (props) => {
                                                 //только тогда диспатчим в редюсер екшн о подписке на пользователя
                                                 props.unfollow(friends.id)
                                             }
+                                            //после асинхронного запроса мы диспатчим false (что у нас запрос закончился), чтобы снова активировать кнопку кнопку
+                                            props.toggleFollowingProgress(false, friends.id);
                                         });
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
+                                //если в массиве хоть одна айдишка равна айдишке пользователя, тогда дизейблим (вернётся true. В противном случае вернётся false)
+                                : <button disabled={props.followingInProgress.some (id => id === friends.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, friends.id);
 
                                     //в пост запросе об отправке запроса с куки указываем третьим параметром (второй - пустой объект или null
                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`, {},
@@ -134,6 +142,7 @@ const Friends = (props) => {
                                                 //только тогда диспатчим в редюсер екшн о подписке на пользователя
                                                 props.follow(friends.id)
                                             }
+                                            props.toggleFollowingProgress(false, friends.id);
                                         });
                                 }}>Follow</button>
                             }

@@ -4,6 +4,7 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
     friends: [
@@ -15,6 +16,8 @@ let initialState = {
     currentPage: 1,
     //значение, говорящее идёт ли запрос данных на сервере
     isFetching: false,
+    //значение чтобы дисейблить кнопку добавления в друзья при первом её нажатии
+    followingInProgress: [],
 };
 
 const friendsReducer = (state = initialState, action) => {
@@ -72,6 +75,16 @@ const friendsReducer = (state = initialState, action) => {
                 isFetching: action.isFetching,
             };
 
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    //если true, дереструктуризиуем массив, который был, и добавляем в конец айдишку пользователя
+                    ? [...state.followingInProgress, action.userId]
+                    //если приходит false, filter возвращает новый массив и фильтруем ненужного пользователя (т.е. пропускаем ту айдишку, которая не равна айдишки, которая пришла из екшена
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            };
+
         default:
             return state;
     }
@@ -84,6 +97,7 @@ export const setUsers = (friends) => ({type: SET_USERS, friends});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
 
 
 export default friendsReducer;
