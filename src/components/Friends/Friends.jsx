@@ -104,13 +104,13 @@ const Friends = (props) => {
                                     //для отписки делаем delete-запрос. В delete-запросе withCredentials идёт вторым параметром, как и в get-запросе
                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`,
                                         {withCredentials: true},
-                                        {/*если нужно привязываем ключ
+                                        /*если нужно привязываем ключ
                                         headers: {
-                                        'API-KEY': 'тут значение ключа'
-                                    }*/}
+                                        'API-KEY': 'b1775b2f-c3a5-4509-8dc9-90b5629de7c3'
+                                        }
+                                    */
                                     )
                                         .then(response => {
-                                            debugger;
                                             //если сервер подверждает, что мы залогинены
                                             if (response.data.resultCode === 0) {
                                                 //только тогда диспатчим в редюсер екшн о подписке на пользователя
@@ -121,7 +121,13 @@ const Friends = (props) => {
                                 : <button onClick={() => {
 
                                     //в пост запросе об отправке запроса с куки указываем третьим параметром (второй - пустой объект или null
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`, {}, {withCredentials: true})
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`, {},
+                                        {withCredentials: true}
+                                    /*если нужно привязываем ключ
+                                        headers: {
+                                        'API-KEY': 'b1775b2f-c3a5-4509-8dc9-90b5629de7c3'
+                                    */
+                                    )
                                         .then(response => {
                                             //если сервер подверждает, что мы залогинены
                                             if (response.data.resultCode === 0) {
