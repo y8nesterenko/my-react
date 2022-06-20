@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -89,15 +91,55 @@ const friendsReducer = (state = initialState, action) => {
             return state;
     }
 };
-export const follow = (userId) => ({type: FOLLOW, userId});
+export const followSuccess = (userId) => ({type: FOLLOW, userId});
 //ActionCreator создаётся вместо отдельного объекта action:
 // let action = { type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text};
-export const unfollow = (userId) => ({type: UNFOLLOW, userId});
+export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (friends) => ({type: SET_USERS, friends});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowingProgress = (isFetching, userId) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
 
+//создаём thunkCreator, который возвращает thunk
+export const getUsers = (currentPage, pageSize) => {
+    //создаём thunk (в параметрах всегда принимает dispatch)
+ return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersAPI.getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+}};
+
+export const follow = (userId) => {
+    return (dispatch) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    usersAPI.follow(userId)
+        .then(response => {
+            //если сервер подверждает, что мы залогинены
+            if (response.data.resultCode === 0) {
+                //только тогда диспатчим в редюсер екшн о подписке на пользователя
+                dispatch(followSuccess(userId))
+            }
+            dispatch(toggleFollowingProgress(false, userId));
+        });
+}};
+
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        usersAPI.unfollow(userId)
+            .then(response => {
+                //если сервер подверждает, что мы залогинены
+                if (response.data.resultCode === 0) {
+                    //только тогда диспатчим в редюсер екшн о подписке на пользователя
+                    dispatch(unfollowSuccess(userId))
+                }
+                dispatch(toggleFollowingProgress(false, userId));
+            });
+    }};
 
 export default friendsReducer;

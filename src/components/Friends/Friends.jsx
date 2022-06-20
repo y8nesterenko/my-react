@@ -3,58 +3,7 @@ import style from './Friends.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
-
-
-//функциональная компонента
-// const Friends = (props) => {
-//
-//     let getUsers = () => {
-//     if (props.friends.length === 0) {
-//         //говорим "Аксиос, дай мне данныепо такой-то ссылке
-//         axios.get('https://social-network.samuraijs.com/api/1.0/users')
-//             //когда будет ответ, выполняем логику (функцию)
-//             .then(response => {
-//                 //сетаем (получаем данные) юзеров и закидываем их в state
-//
-//                 //отдаём в dispatch массив юзеров
-//                 props.setUsers(response.data.items)
-//             });
-//     }
-//     }
-//
-//     return (
-//         <div className={style.wrapper}><span>USERS</span><button onClick={getUsers}>Get Users</button>
-//             {
-//                 props.friends.map(friends => <div key={friends.id}>
-//                     <div className={style.header}></div>
-//                     <div className={style.body}>
-//                         <div className={style.avatar}>
-//                             <img src={friends.photos.small != null ? friends.photos.small : userPhoto}/>
-//                             {friends.followed
-//                                 ? <button onClick={() => {
-//                                     props.unfollow(friends.id)
-//                                 }}>Unfollow</button>
-//                                 : <button onClick={() => {
-//                                     props.follow(friends.id)
-//                                 }}>Follow</button>}
-//                         </div>
-//                         <div className={style.info}>
-//                             <div className={style.info__column}>
-//                                 <div className={style.info__row}>{friends.name}</div>
-//                                 <br/>
-//                                 <div className={style.info__row}>{friends.status}</div>
-//                             </div>
-//                             <div className={style.info__column + ' ' + style.info__column_right}>
-//                                 <div className={style.info__row}>{'friends.location.country'},</div>
-//                                 <div className={style.info__row}>{'friends.location.city'}</div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>)}
-//             <button className={style.showMore}>Show more</button>
-//         </div>
-//     )
-// };
+import {usersAPI} from "../../api/api";
 
 const Friends = (props) => {
 
@@ -101,50 +50,15 @@ const Friends = (props) => {
                             </NavLink>
                             {friends.followed
                                 //кнопка дисейблится если в массиве хоть одна айдишка равна айдишке пользователя
-                                ? <button disabled={props.followingInProgress.some (id => id === friends.id)} onClick={() => {
-                                    //перед асинхронным запросом мы диспатчим true (что у нас запрос в процессе), чтобы дисейблить нкопку
-                                    props.toggleFollowingProgress(true, friends.id);
-
-                                    //для отписки делаем delete-запрос. В delete-запросе withCredentials идёт вторым параметром, как и в get-запросе
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`,
-                                        {withCredentials: true},
-                                        /*если нужно привязываем ключ
-                                        headers: {
-                                        'API-KEY': 'b1775b2f-c3a5-4509-8dc9-90b5629de7c3'
-                                        }
-                                    */
-                                    )
-                                        .then(response => {
-                                            //если сервер подверждает, что мы залогинены
-                                            if (response.data.resultCode === 0) {
-                                                //только тогда диспатчим в редюсер екшн о подписке на пользователя
-                                                props.unfollow(friends.id)
-                                            }
-                                            //после асинхронного запроса мы диспатчим false (что у нас запрос закончился), чтобы снова активировать кнопку кнопку
-                                            props.toggleFollowingProgress(false, friends.id);
-                                        });
-                                }}>Unfollow</button>
+                                ? <button disabled={props.followingInProgress.some(id => id === friends.id)}
+                                          onClick={() => {
+                                              props.unfollow(friends.id)
+                                          }}>Unfollow</button>
                                 //если в массиве хоть одна айдишка равна айдишке пользователя, тогда дизейблим (вернётся true. В противном случае вернётся false)
-                                : <button disabled={props.followingInProgress.some (id => id === friends.id)} onClick={() => {
-                                    props.toggleFollowingProgress(true, friends.id);
-
-                                    //в пост запросе об отправке запроса с куки указываем третьим параметром (второй - пустой объект или null
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${friends.id}`, {},
-                                        {withCredentials: true}
-                                    /*если нужно привязываем ключ
-                                        headers: {
-                                        'API-KEY': 'b1775b2f-c3a5-4509-8dc9-90b5629de7c3'
-                                    */
-                                    )
-                                        .then(response => {
-                                            //если сервер подверждает, что мы залогинены
-                                            if (response.data.resultCode === 0) {
-                                                //только тогда диспатчим в редюсер екшн о подписке на пользователя
-                                                props.follow(friends.id)
-                                            }
-                                            props.toggleFollowingProgress(false, friends.id);
-                                        });
-                                }}>Follow</button>
+                                : <button disabled={props.followingInProgress.some(id => id === friends.id)}
+                                          onClick={() => {
+                                              props.follow(friends.id)
+                                          }}>Follow</button>
                             }
                         </div>
                         <div className={style.info}>
