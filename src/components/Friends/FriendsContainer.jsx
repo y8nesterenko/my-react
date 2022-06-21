@@ -3,9 +3,7 @@ import Friends from "./Friends";
 import {connect} from "react-redux";
 import {follow, unfollow, getUsers, setCurrentPage} from "../../redux/friends-reducer";
 import Preloader from "../common/Preloader";
-import {usersAPI} from "../../api/api";
 
-//классовая компонента
 class FriendsContainer extends React.Component {
 
     //constructor можно не писать, если он просто передаёт пропсы родителю (super'у). Он это делает по умолчанию

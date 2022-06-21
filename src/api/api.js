@@ -9,15 +9,6 @@ const instance = axios.create({
     }*/
 });
 
-/* Ниже getUsers запаковали в объект usersAPI
-export const getUsers = (currentPage = 1, pageSize = 5) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => {
-            return response.data;
-        });
-};
- */
-
 export const usersAPI = {
     getUsers (currentPage = 1, pageSize = 5) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
@@ -31,7 +22,18 @@ export const usersAPI = {
     unfollow(userId) {
        return instance.delete(`follow/${userId}`)
     },
+    getProfile(userId) {
+        return instance.get(`profile/${userId}`)
+    },
 };
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`,
+            {withCredentials: true},
+        )
+    },
+}
 
 
 /* до рефакторинга с использованием instance запрос был такой
