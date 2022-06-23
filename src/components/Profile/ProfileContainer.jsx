@@ -1,9 +1,8 @@
 import React from "react";
 import Profile from "./Profile";
-import * as axios from "axios";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
-import {useLocation,useNavigate, useParams} from "react-router-dom";
+import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component {
@@ -22,6 +21,11 @@ class ProfileContainer extends React.Component {
     };
 
     render() {
+
+        if (!this.props.isAuth) {
+            return <Navigate to={'/login'}/>
+        }
+
         return (
             //прокидываем в компоненту полученные пропсы. + помимо тех пропсов, что в меня пришли, на тебе ещё профайл
             <Profile {...this.props} profile={this.props.profile}/>
@@ -31,7 +35,8 @@ class ProfileContainer extends React.Component {
 
 //круглые скобки перед фигурными скобками значит, что возвращается объект, а не тело функции
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth,
 });
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
