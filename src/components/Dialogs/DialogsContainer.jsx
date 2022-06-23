@@ -2,11 +2,14 @@ import React from "react";
 import {addMessageActionCreator, addNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state) => {
     return {
     messagesPage: state.messagesPage,
-    isAuth: state.auth.isAuth,
+        //прокидывать isAuth уже не нужно, это делает hoc
+    //isAuth: state.auth.isAuth,
     }
 };
 
@@ -20,7 +23,26 @@ let mapDispatchToProps = (dispatch) => {
         },
     }
 };
+/* hoc до рефакторинга (переноса в отдельный файл)
+let AuthRedirectComponent = (props) => {
+    if (!props.isAuth) {
+        return <Navigate to={'/login'}/>
+    }
+    return <Dialogs {...props} />
+};
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+//прописываем пропсы для редиректа
+let mapStateToPropsForRedirect = (state) => ({
+    isAuth: state.auth.isAuth,
+});
+
+//снабжаем hoc нужными пропсами
+AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent);
+*/
+
+let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default DialogsContainer;

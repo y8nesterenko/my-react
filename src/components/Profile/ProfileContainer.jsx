@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 class ProfileContainer extends React.Component {
@@ -22,21 +23,36 @@ class ProfileContainer extends React.Component {
 
     render() {
 
-        if (!this.props.isAuth) {
-            return <Navigate to={'/login'}/>
-        }
-
         return (
             //прокидываем в компоненту полученные пропсы. + помимо тех пропсов, что в меня пришли, на тебе ещё профайл
             <Profile {...this.props} profile={this.props.profile}/>
         )
     }
 };
+/* hoc до рефакторинга (переноса в отдельный файл)
+let AuthRedirectComponent = (props) => {
+    if (!props.isAuth) {
+        return <Navigate to={'/login'}/>
+    }
+    return <ProfileContainer {...props} />
+};
+
+//прописываем пропсы для редиректа
+let mapStateToPropsForRedirect = (state) => ({
+    isAuth: state.auth.isAuth,
+});
+
+//снабжаем hoc нужными пропсами
+AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent);
+*/
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 //круглые скобки перед фигурными скобками значит, что возвращается объект, а не тело функции
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth,
+    //прокидывать isAuth уже не нужно, это делает hoc
+    //isAuth: state.auth.isAuth,
 });
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
@@ -55,4 +71,4 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {getUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {getUserProfile})(withRouter(AuthRedirectComponent));
