@@ -1,0 +1,10 @@
+.statusBlock {
+    margin-left: 10px;
+}
+
+.editStatus {
+    color: #000;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 10px;
+}
