@@ -3,7 +3,8 @@ import style from './ProfileStatus.module.css';
 
 class ProfileStatus extends React.Component {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status,
     };
 
     editModeOn() {
@@ -22,13 +23,22 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         });
+        this.props.updateUserStatus(this.state.status);
+    };
+
+    //чтобы не байндить функцию в callback'е, можно использовать стрелочную функцию
+    onUserStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value,
+        })
     };
 
     render() {
         return (
             <div> Status:
                 {!this.state.editMode &&
-                    <span className={style.statusBlock}>{this.props.status}
+                    <span className={style.statusBlock}>
+                        {this.props.status || "This user hasn't set status"}
                         {/*нужно байндить this, иначе функция не сработает*/}
                         <span onClick={this.editModeOn.bind(this)} className={style.editStatus}>&#128393;</span>
                     </span>
@@ -39,7 +49,9 @@ class ProfileStatus extends React.Component {
                         onBlur={this.editModeOff.bind(this)}
                         //автофокус в поле ввода инпута
                         autoFocus={true}
-                        value={this.props.status}></input>
+                        value={this.state.status}
+                        onChange={this.onUserStatusChange}
+                    />
                 }
             </div>
         )

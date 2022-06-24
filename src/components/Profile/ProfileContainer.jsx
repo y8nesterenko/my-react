@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import withRouter from "../../hoc/withRouter";
@@ -20,12 +20,16 @@ class ProfileContainer extends React.Component {
 
         //делаем get-запрос профиля пользователя по Id пользователя
         this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     };
 
     render() {
         return (
             //прокидываем в компоненту полученные пропсы. + помимо тех пропсов, что в меня пришли, на тебе ещё профайл
-            <Profile {...this.props} profile={this.props.profile}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateUserStatus={this.props.updateUserStatus} />
         )
     }
 };
@@ -33,6 +37,7 @@ class ProfileContainer extends React.Component {
 //круглые скобки перед фигурными скобками значит, что возвращается объект, а не тело функции
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status,
     //прокидывать isAuth уже не нужно, это делает hoc
     //isAuth: state.auth.isAuth,
 });
@@ -60,7 +65,7 @@ export default connect(mapStateToProps, {getUserProfile})(withRouter(AuthRedirec
  */
 
 export default compose(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
     withRouter,
     withAuthRedirect,
 )(ProfileContainer);

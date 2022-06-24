@@ -2,12 +2,9 @@ import * as axios from "axios";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-
-/*{withCredentials: true},
-    headers: {
-        'API-KEY': 'b1775b2f-c3a5-4509-8dc9-90b5629de7c3'
-    }*/
-});
+    withCredentials: true,
+    headers: {'API-KEY': '718c556a-277b-4513-b77b-893b6f3e2309'},
+    });
 
 export const usersAPI = {
     getUsers (currentPage = 1, pageSize = 5) {
@@ -23,8 +20,23 @@ export const usersAPI = {
        return instance.delete(`follow/${userId}`)
     },
     getProfile(userId) {
+        console.warn('Obsolete method. Please use profileAPI object');
+        return profileAPI.getProfile(userId)
+    },
+};
+
+export const profileAPI = {
+    getProfile(userId) {
         return instance.get(`profile/${userId}`)
     },
+    //в профайле нет статуса пользователя, поэтому запрашиваем отдельно
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status) {
+        //вторым параметром передаём payload (полезную нагрузку) в свойствах согласно требованиям сервера
+        return instance.put(`profile/status`, {status: status})
+    }
 };
 
 export const authAPI = {
