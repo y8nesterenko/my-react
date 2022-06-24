@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../common/Preloader";
+import ProfileStatus from "../Profile/ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -26,7 +27,7 @@ const ProfileInfo = (props) => {
                   <li>About Me: {props.profile.aboutMe}</li>
                   <li>City: Kyiv</li>
                   <li>Education: Internet</li>
-                  <li>Web-site: <a href='http://test.inf.ua' target="blank">test.inf.ua</a></li>
+                  <li><ProfileStatus status={'Hello my friends'}/></li>
                </ul>
             </div>
          </div>
