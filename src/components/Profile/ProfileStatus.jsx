@@ -36,10 +36,10 @@ class ProfileStatus extends React.Component {
     componentDidUpdate(prevProps, prevState) {
 //если в предыдущих пропсах статус был, который не равен статусу в текущих пропсах (изменился именно статус, из-за чего и срабатываем метод componentDidUpdate), тогда синхронизируем status в пропсах. Изначально status - пустая строка. Потом с сервера запрашиваем status пользователя и он сетается в state и приходит в компонент через пропсы
         if (prevProps.status !== this.props.status) {
-    this.setState({
-        status:this.props.status
-    })
-}
+            this.setState({
+                status: this.props.status
+            })
+        }
     };
 
     render() {
