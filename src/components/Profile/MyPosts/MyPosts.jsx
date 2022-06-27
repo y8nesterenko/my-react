@@ -1,6 +1,49 @@
 import React from 'react';
 import Post from './Post/Post'
 import style from './MyPosts.module.css';
+import {Formik} from "formik";
+
+const AddPostForm = (props) => {
+    return (
+        <Formik
+            initialValues={{newPostText: ''}}
+            onSubmit={(values) => {
+                props.addPost(values.newPostText);
+                //alert(JSON.stringify(values.newPostText));
+            }}
+        >
+            {({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  //isSubmitting,
+                  /* and other goodies */
+              }) => (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <input
+                            type="textarea"
+                            name="newPostText"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            //value={values.newPostBody}
+                            placeholder='Enter your post'
+                        />
+                        {errors.newPostText && touched.newPostText && errors.newPostText}
+                    </div>
+                    <button type="submit"
+                            //disabled={isSubmitting}
+                    >
+                        Add post
+                    </button>
+                </form>
+            )}
+        </Formik>
+    )
+};
 
 const MyPosts = (props) => {
 
@@ -13,24 +56,11 @@ const MyPosts = (props) => {
         props.addPost();
     };
 
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.onPostChange(text);
-    };
 
     return (
         <div className={style.posts}>
             <h2 className={style.posts__title}>My posts</h2>
-            <form>
-                <textarea onChange={onPostChange}
-                          value={props.newPostText}
-                          ref={newPostElement}
-                placeholder='Введите текст нового поста'/>
-            </form>
-            <div className={style.posts__button}>
-                <button type='sumbit' onClick={ addPost }>Add post</button>
-                <button type='sumbit'>Remove post</button>
-            </div>
+            <AddPostForm addPost={props.addPost} />
             {postsElements}
         </div>);
 };

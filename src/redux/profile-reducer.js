@@ -33,7 +33,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...state.posts,
-                    {id: 5, message: state.newPostText, like: 0,},
+                    {id: 9, message: action.newPostText, like: 22,},
                 ],
                 newPostText: '',
             };
@@ -61,7 +61,7 @@ export const addNewPostTextActionCreator = (text) => {
 };
 
 //аналогична запись другого ActionCreatora с синтаксисом в одну строчку
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 
 //сюда будет приходить профайл, и в экшене будет сидеть сам профайл
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});

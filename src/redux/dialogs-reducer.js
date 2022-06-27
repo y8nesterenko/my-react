@@ -1,5 +1,4 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
     dialogs: [
@@ -61,39 +60,23 @@ let initialState = {
         {id: 8, message: "Сообщение 8", type: "outcome"},
         {id: 9, message: "Сообщение 9", type: "income"},
     ],
-
-    newMessageText: '',
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
+        case SEND_MESSAGE:
             return {
                 ...state,
-                newMessageText: action.newMessage,
-                };
-        case ADD_MESSAGE:
-            let newMessage = {
-                id: 10,
-                message: state.newMessageText,
-                type: 'outcome',
-            };
-            return {
-                ...state,
-                newMessageText: '',
                 messages: [
                     ...state.messages,
                     //пушим новый объект
-                    {id: 10, message: state.newMessageText, type: 'outcome', }],
+                    {id: 10, message: action.newMessageBody, type: 'outcome', }],
             };
         default:
             return state;
     }
 };
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-//ActionCreator создаётся вместо отдельного объекта action:
-// let action = { type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: text};
-export const addNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newMessage: text});
 
+export const sendMessage = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody});
 
 export default dialogsReducer;

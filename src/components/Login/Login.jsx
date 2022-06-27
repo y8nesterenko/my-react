@@ -64,6 +64,17 @@ const LoginForm = (props) => {
                         />
                         {errors.password && touched.password && errors.password}
                     </div>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="rememberMe"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.rememberMe}
+                            checked
+                        />remember me
+                        {errors.rememberMe && touched.rememberMe && errors.rememberMe}
+                    </div>
                     <button type="submit" disabled={isSubmitting}>
                         Log in
                     </button>
