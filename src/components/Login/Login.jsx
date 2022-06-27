@@ -18,6 +18,7 @@ const LoginForm = (props) => {
             initialValues={{
                 email: '',
                 password: '',
+                passwordConfirmation: '',
                 rememberMe: undefined,
             }}
             validationSchema={loginFormSchema}
@@ -57,6 +58,16 @@ const LoginForm = (props) => {
                             value={values.password}
                         />
                         {errors.password && touched.password && errors.password}
+                    </div>
+                    <div>
+                        <input
+                            type="password"
+                            name="passwordConfirmation"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.passwordConfirmation}
+                        />
+                        {errors.passwordConfirmation && touched.passwordConfirmation && errors.passwordConfirmation}
                     </div>
                     <div>
                         <input
