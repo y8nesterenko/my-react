@@ -4,11 +4,17 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Navigate} from "react-router-dom";
 import {Formik} from "formik";
+import {newMessageFormSchema} from "../../utils/validators";
+//import {maxLength} from "../../utils/validators";
 
 const AddMessageForm = (props) => {
+//const maxLength30 = maxLength(30);
+
     return (
         <Formik
             initialValues={{newMessageBody: ''}}
+            //validate={values => maxLength30}
+            validationSchema={newMessageFormSchema}
             onSubmit={(values) => {
                 props.sendMessage(values.newMessageBody);
                 //console.log(JSON.stringify(values, null, 2));

@@ -2,14 +2,16 @@ import React from 'react';
 import Post from './Post/Post'
 import style from './MyPosts.module.css';
 import {Formik} from "formik";
+import {newPostFormSchema} from "../../../utils/validators";
 
 const AddPostForm = (props) => {
+
     return (
         <Formik
             initialValues={{newPostText: ''}}
+            validationSchema={newPostFormSchema}
             onSubmit={(values) => {
                 props.addPost(values.newPostText);
-                //alert(JSON.stringify(values.newPostText));
             }}
         >
             {({
@@ -19,7 +21,7 @@ const AddPostForm = (props) => {
                   handleChange,
                   handleBlur,
                   handleSubmit,
-                  //isSubmitting,
+                  isSubmitting,
                   /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
@@ -31,6 +33,7 @@ const AddPostForm = (props) => {
                             onBlur={handleBlur}
                             //value={values.newPostBody}
                             placeholder='Enter your post'
+                            //validate={[required, maxLength30]}
                         />
                         {errors.newPostText && touched.newPostText && errors.newPostText}
                     </div>
@@ -49,13 +52,6 @@ const MyPosts = (props) => {
 
     let postsElements = props.posts.map(
         (post) => <Post like={post.like} message={post.message} key={post.id} id={post.id}/>);
-
-    let newPostElement = React.createRef();
-
-    let addPost = () => {
-        props.addPost();
-    };
-
 
     return (
         <div className={style.posts}>

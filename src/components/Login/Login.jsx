@@ -1,8 +1,8 @@
 import React from "react";
 import {Formik} from "formik";
+import {loginFormSchema} from "../../utils/validators";
 
 const Login = (props) => {
-
     return (
         <div>
             <h1>Please login in the form below </h1>
@@ -12,25 +12,18 @@ const Login = (props) => {
 };
 
 const LoginForm = (props) => {
+
     return (
         <Formik
-            initialValues={{email: '', password: ''}}
-            validate={values => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                ) {
-                    errors.email = 'Invalid email address';
-                }
-                return errors;
+            initialValues={{
+                email: '',
+                password: '',
+                rememberMe: undefined,
             }}
+            validationSchema={loginFormSchema}
             onSubmit={(values, {setSubmitting}) => {
-                setTimeout(() => {
-                    console.log(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                }, 400);
+                console.log(JSON.stringify(values, null, 2));
+                setSubmitting(false);
             }}
         >
             {({
@@ -43,6 +36,7 @@ const LoginForm = (props) => {
                   isSubmitting,
                   /* and other goodies */
               }) => (
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <input
@@ -71,17 +65,20 @@ const LoginForm = (props) => {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.rememberMe}
-                            checked
                         />remember me
-                        {errors.rememberMe && touched.rememberMe && errors.rememberMe}
+                        <div>{touched.rememberMe && errors.rememberMe}</div>
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
+
+                    <button type="submit"
+                            disabled={isSubmitting}>
                         Log in
                     </button>
                 </form>
             )}
+
         </Formik>
     )
 };
+
 
 export default Login;
