@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const loginFormSchema = Yup.object({
+export const registrationFormSchema = Yup.object({
     email: Yup.string()
         .email()
         .required('Required'),
@@ -9,6 +9,16 @@ export const loginFormSchema = Yup.object({
         .required('Required'),
     passwordConfirmation: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    });
+
+export const loginFormSchema = Yup.object({
+    email: Yup.string()
+        .email()
+        .required('Required'),
+    password: Yup.string()
+        .min(2, 'Must be longer than 2 characters')
+        .max(30, 'Must be 30 characters or less')
+        .required('Required'),
     rememberMe: Yup.boolean()
         .required('Please check the box above'),
 });
