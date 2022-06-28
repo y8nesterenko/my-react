@@ -1,6 +1,8 @@
 import React from "react";
 import {Formik} from "formik";
 import {loginFormSchema} from "../../utils/validators";
+import style from "./Login.module.css"
+import {Input} from "../Forms/Forms";
 
 const Login = (props) => {
     return (
@@ -38,26 +40,24 @@ const LoginForm = (props) => {
               }) => (
 
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
+                    <Input type="email"
+                               name="email"
+                               onChange={handleChange}
+                               onBlur={handleBlur}
+                               value={values.email}
+                               placeholder='Enter your email'
+                               touched={touched.email}
+                               error={errors.email}
                         />
-                        {errors.email && touched.email && errors.email}
-                    </div>
-                    <div>
-                        <input
-                            type="password"
-                            name="password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
+                        <Input type="password"
+                               name="password"
+                               onChange={handleChange}
+                               onBlur={handleBlur}
+                               value={values.password}
+                               placeholder='Enter your password'
+                               touched={touched.password}
+                               error={errors.password}
                         />
-                        {errors.password && touched.password && errors.password}
-                    </div>
                     <div>
                         <input
                             type="checkbox"
@@ -66,7 +66,7 @@ const LoginForm = (props) => {
                             onBlur={handleBlur}
                             value={values.rememberMe}
                         />remember me
-                        <div>{touched.rememberMe && errors.rememberMe}</div>
+                        <div className={style.error}>{errors.rememberMe && touched.rememberMe && errors.rememberMe}</div>
                     </div>
 
                     <button type="submit"

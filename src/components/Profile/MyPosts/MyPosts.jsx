@@ -3,6 +3,7 @@ import Post from './Post/Post'
 import style from './MyPosts.module.css';
 import {Formik} from "formik";
 import {newPostFormSchema} from "../../../utils/validators";
+import {Input} from "../../Forms/Forms";
 
 const AddPostForm = (props) => {
 
@@ -25,20 +26,20 @@ const AddPostForm = (props) => {
                   /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            type="textarea"
-                            name="newPostText"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            //value={values.newPostBody}
-                            placeholder='Enter your post'
-                            //validate={[required, maxLength30]}
-                        />
-                        {errors.newPostText && touched.newPostText && errors.newPostText}
-                    </div>
+                    <Input
+                        {...props}
+                        type="textarea"
+                        name="newPostText"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.newPostText}
+                        placeholder='Enter your post'
+                        touched={touched.newPostText}
+                        error={errors.newPostText}
+                    />
+
                     <button type="submit"
-                            //disabled={isSubmitting}
+                        //disabled={isSubmitting}
                     >
                         Add post
                     </button>
@@ -56,7 +57,7 @@ const MyPosts = (props) => {
     return (
         <div className={style.posts}>
             <h2 className={style.posts__title}>My posts</h2>
-            <AddPostForm addPost={props.addPost} />
+            <AddPostForm addPost={props.addPost}/>
             {postsElements}
         </div>);
 };

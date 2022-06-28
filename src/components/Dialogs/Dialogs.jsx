@@ -3,78 +3,21 @@ import style from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Navigate} from "react-router-dom";
-import {Formik} from "formik";
-import {newMessageFormSchema} from "../../utils/validators";
-//import {maxLength} from "../../utils/validators";
-
-const AddMessageForm = (props) => {
-//const maxLength30 = maxLength(30);
-
-    return (
-        <Formik
-            initialValues={{newMessageBody: ''}}
-            //validate={values => maxLength30}
-            validationSchema={newMessageFormSchema}
-            onSubmit={(values) => {
-                props.sendMessage(values.newMessageBody);
-                //console.log(JSON.stringify(values, null, 2));
-            }}
-        >
-            {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-                  /* and other goodies */
-              }) => (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <input
-                            type="textarea"
-                            name="newMessageBody"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.newMessageBody}
-                            placeholder='Enter your messsage'
-                        />
-                        {errors.newMessageBody && touched.newMessageBody && errors.newMessageBody}
-                    </div>
-                    <button type="submit"
-                            //disabled={isSubmitting}
-                    >
-                        Send message
-                    </button>
-                </form>
-            )}
-        </Formik>
-    )
-};
+import {AddMessageForm} from "./AddMessageForm";
 
 const Dialogs = (props) => {
 
     let state = props.messagesPage;
-
     let dialogsElements = state.dialogs.map(
         (dialog) => <DialogItem id={dialog.id} key={dialog.id} name={dialog.name} avatar={dialog.avatar} /> );
-
     let messagesElements = state.messages.map(
         (message) => <Message message={message.message} key={message.id} type={message.type}/> );
-
-    /*
-    let addText = () => {
-        props.addText();
-    };
-     */
 
     if (!props.isAuth) {
         return <Navigate to={'/login'}/>
     }
 
     return (
-
         <div className={style.dialogs}>
             <div className={style.dialogs__items}>
                 {dialogsElements}
