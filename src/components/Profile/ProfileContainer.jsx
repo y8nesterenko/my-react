@@ -15,7 +15,7 @@ class ProfileContainer extends React.Component {
 
         //если в параметрах нет userId, тогда он равен 2
         if (!userId) {
-            userId = 2;
+            userId = 24606;
         }
 
         //делаем get-запрос профиля пользователя по Id пользователя

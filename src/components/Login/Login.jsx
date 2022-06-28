@@ -3,18 +3,25 @@ import {Formik} from "formik";
 import {loginFormSchema} from "../../utils/validators";
 import style from "./Login.module.css"
 import {Input} from "../Forms/Forms";
+import {login} from "../../redux/auth-reducer";
+import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 const Login = (props) => {
+
+    if (props.isAuth) {
+        return <Navigate to={'/profile/24606'}/>
+    }
+
     return (
         <div>
             <h1>Please login in the form below </h1>
-            <LoginForm/>
+            <LoginForm {...props}/>
         </div>
     )
 };
 
 const LoginForm = (props) => {
-
     return (
         <Formik
             initialValues={{
@@ -24,7 +31,7 @@ const LoginForm = (props) => {
             }}
             validationSchema={loginFormSchema}
             onSubmit={(values, {setSubmitting}) => {
-                console.log(JSON.stringify(values, null, 2));
+                props.login(values.email, values.password, values.rememberMe);
                 setSubmitting(false);
             }}
         >
@@ -41,23 +48,23 @@ const LoginForm = (props) => {
 
                 <form onSubmit={handleSubmit}>
                     <Input type="email"
-                               name="email"
-                               onChange={handleChange}
-                               onBlur={handleBlur}
-                               value={values.email}
-                               placeholder='Enter your email'
-                               touched={touched.email}
-                               error={errors.email}
-                        />
-                        <Input type="password"
-                               name="password"
-                               onChange={handleChange}
-                               onBlur={handleBlur}
-                               value={values.password}
-                               placeholder='Enter your password'
-                               touched={touched.password}
-                               error={errors.password}
-                        />
+                           name="email"
+                           onChange={handleChange}
+                           onBlur={handleBlur}
+                           value={values.email}
+                           placeholder='Enter your email'
+                           touched={touched.email}
+                           error={errors.email}
+                    />
+                    <Input type="password"
+                           name="password"
+                           onChange={handleChange}
+                           onBlur={handleBlur}
+                           value={values.password}
+                           placeholder='Enter your password'
+                           touched={touched.password}
+                           error={errors.password}
+                    />
                     <div>
                         <input
                             type="checkbox"
@@ -66,7 +73,8 @@ const LoginForm = (props) => {
                             onBlur={handleBlur}
                             value={values.rememberMe}
                         />remember me
-                        <div className={style.error}>{errors.rememberMe && touched.rememberMe && errors.rememberMe}</div>
+                        <div
+                            className={style.error}>{errors.rememberMe && touched.rememberMe && errors.rememberMe}</div>
                     </div>
 
                     <button type="submit"
@@ -80,5 +88,9 @@ const LoginForm = (props) => {
     )
 };
 
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+});
 
-export default Login;
+export default connect(mapStateToProps, {login})(Login);
+
