@@ -15,7 +15,7 @@ class ProfileContainer extends React.Component {
 
         //если в параметрах нет userId, тогда он равен 2
         if (!userId) {
-            userId = 24606;
+            userId = this.props.authorizedUserId;
         }
 
         //делаем get-запрос профиля пользователя по Id пользователя
@@ -38,31 +38,9 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
-    //прокидывать isAuth уже не нужно, это делает hoc
-    //isAuth: state.auth.isAuth,
-});
-
-/* hoc до рефакторинга (переноса в отдельный файл)
-let AuthRedirectComponent = (props) => {
-    if (!props.isAuth) {
-        return <Navigate to={'/login'}/>
-    }
-    return <ProfileContainer {...props} />
-};
-
-//прописываем пропсы для редиректа
-let mapStateToPropsForRedirect = (state) => ({
+    authorizedUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
 });
-
-//снабжаем hoc нужными пропсами
-AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent);
-*/
-
-/* Заменяем эти записи на compose
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-export default connect(mapStateToProps, {getUserProfile})(withRouter(AuthRedirectComponent));
- */
 
 export default compose(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),

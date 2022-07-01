@@ -10,7 +10,7 @@ import {Navigate} from "react-router-dom";
 const Login = (props) => {
 
     if (props.isAuth) {
-        return <Navigate to={'/profile/24606'}/>
+        return <Navigate to={`/profile/${props.authorizedUserId}`}/>
     }
 
     return (
@@ -30,8 +30,8 @@ const LoginForm = (props) => {
                 rememberMe: undefined,
             }}
             validationSchema={loginFormSchema}
-            onSubmit={(values, {setSubmitting}) => {
-                props.login(values.email, values.password, values.rememberMe);
+            onSubmit={(values, {setSubmitting, setStatus}) => {
+                props.login(values.email, values.password, values.rememberMe, setStatus);
                 setSubmitting(false);
             }}
         >
@@ -43,6 +43,7 @@ const LoginForm = (props) => {
                   handleBlur,
                   handleSubmit,
                   isSubmitting,
+                  status,
                   /* and other goodies */
               }) => (
 
@@ -76,6 +77,7 @@ const LoginForm = (props) => {
                         <div
                             className={style.error}>{errors.rememberMe && touched.rememberMe && errors.rememberMe}</div>
                     </div>
+                    <div className={style.error}>{status}</div>
 
                     <button type="submit"
                             disabled={isSubmitting}>
@@ -89,7 +91,8 @@ const LoginForm = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    authorizedUserId: state.auth.userId,
 });
 
 export default connect(mapStateToProps, {login})(Login);
