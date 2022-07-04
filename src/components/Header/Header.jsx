@@ -17,7 +17,7 @@ const Header = (props) => {
                 <li>
                     {/*если в пропсах isAuth == true, показываем логин пользгователя, иначе страницу для логина*/}
                     {props.isAuth
-                        ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
+                        ? <div>{props.login}<button onClick={props.logout}>Log out</button></div>
                         : <NavLink to={'/login'}>Login</NavLink> }</li>
                 <li>Аватарка</li>
             </ul>

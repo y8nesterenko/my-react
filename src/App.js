@@ -11,21 +11,34 @@ import FriendsContainer from "./components/Friends/FriendsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import {connect} from "react-redux";
+import {compose} from "redux";
+import withRouter from "./hoc/withRouter";
+import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./components/common/Preloader";
 
 
-const App = (props) => {
+class App extends React.Component {
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
-    return (
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+
+        return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
-                <Navbar />
+                <Navbar/>
                 <div className="app-wrapper-content">
                     <Routes>
                         {/*<Route path='' element={<ProfileContainer />}/>*/}
 
                         {/*через двоеточие в пути обозначаем параметр*/}
-                        <Route path='/profile/:userId' element={<ProfileContainer />}/>
-                        <Route path='/dialogs' element={<DialogsContainer />}/>
+                        <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                        <Route path='/dialogs' element={<DialogsContainer/>}/>
                         <Route path='/friends' element={<FriendsContainer/>}/>
                         <Route path='/login' element={<Login/>}/>
                         {/*<Route path='/music' element={<Music text="Здесь будет музыка"/>}/>*/}
@@ -34,7 +47,15 @@ const App = (props) => {
                     </Routes>
                 </div>
             </div>
-    );
-};
+        );
+    }
+}
 
-export default App;
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized,
+});
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {initializeApp})
+)(App);

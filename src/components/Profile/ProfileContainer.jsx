@@ -6,7 +6,6 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import withRouter from "../../hoc/withRouter";
 
-
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
@@ -16,6 +15,10 @@ class ProfileContainer extends React.Component {
         //если в параметрах нет userId, тогда он равен 2
         if (!userId) {
             userId = this.props.authorizedUserId;
+            //делаем програмный редирект (использовать не рекомендуется, делать редирект только с помощью JSX'а - через render при изменении state'а)
+            if (!userId) {
+                this.props.history.push('/login');
+            }
         }
 
         //делаем get-запрос профиля пользователя по Id пользователя
