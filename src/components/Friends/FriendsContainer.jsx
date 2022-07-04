@@ -1,10 +1,13 @@
 import React from "react";
 import Friends from "./Friends";
 import {connect} from "react-redux";
-import {follow, unfollow, getUsers, setCurrentPage} from "../../redux/friends-reducer";
+import {follow, unfollow, requestUsers, setCurrentPage} from "../../redux/friends-reducer";
 import Preloader from "../common/Preloader";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getUsers, getCurrentPage, getFollowingInProgress,
+    getIsFetching, getPageSize, getTotalFriendsCount,
+} from "../../redux/userSelectors";
 
 class FriendsContainer extends React.Component {
 
@@ -12,13 +15,13 @@ class FriendsContainer extends React.Component {
     //constructor(props) {
     //super(props);}
     componentDidMount() {
-       this.props.getUsers(this.props.currentPage, this.props.pageSize);
+       this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
 
     //метод для запроса на сервер при клике на текущию страницу массива пользователей
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     };
 
 
@@ -45,6 +48,7 @@ class FriendsContainer extends React.Component {
     }
 };
 
+/*
 let mapStateToProps = (state) => {
     return {
         //прокидываем через пропсы в компоненту данные из редюсера
@@ -57,6 +61,16 @@ let mapStateToProps = (state) => {
         followingInProgress: state.friendsPage.followingInProgress,
     }
 };
+ */
+
+let mapStateToProps = (state) => ({
+    friends: getUsers(state),
+    pageSize: getPageSize(state),
+    totalFriendsCount: getTotalFriendsCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
+});
 
 /*
 export default connect(mapStateToProps, {
@@ -72,7 +86,7 @@ export default compose(
         follow,
         unfollow,
         setCurrentPage,
-        getUsers,
+        requestUsers,
     }),
     //withAuthRedirect,
 )(FriendsContainer);
