@@ -49,17 +49,38 @@ const AddPostForm = (props) => {
     )
 };
 
-const MyPosts = (props) => {
-
+//React.memo - аналог shouldComponentUpdate для классовой компоненты
+const MyPosts = React.memo ((props) => {
     let postsElements = props.posts.map(
         (post) => <Post like={post.like} message={post.message} key={post.id} id={post.id}/>);
-
     return (
         <div className={style.posts}>
             <h2 className={style.posts__title}>My posts</h2>
             <AddPostForm addPost={props.addPost}/>
             {postsElements}
         </div>);
-};
+});
+
+/*refactor to classComponent (Ctrl + Shift + Alt + T)
+class MyPosts extends React.Component {
+
+PureComponent делает проверку shouldComponentUpdate автоматически за нас
+    class MyPosts extends React.PureComponent {
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props !== nextProps || this.state !== nextState
+    }
+
+    render() {
+        let postsElements = this.props.posts.map(
+            (post) => <Post like={post.like} message={post.message} key={post.id} id={post.id}/>);
+        return (
+            <div className={style.posts}>
+                <h2 className={style.posts__title}>My posts</h2>
+                <AddPostForm addPost={this.props.addPost}/>
+                {postsElements}
+            </div>);
+    }
+}
+ */
 
 export default MyPosts;
