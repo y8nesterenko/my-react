@@ -1,0 +1,15 @@
+.pagination {
+    width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+button {
+    cursor: pointer;
+}
+
+.selectedPage {
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+}

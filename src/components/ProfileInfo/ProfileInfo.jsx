@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
 import Preloader from "../common/Preloader";
-import ProfileStatus from "../Profile/ProfileStatus";
 import ProfileStatusWithHooks from "../Profile/ProfileStatusWithHooks";
+import userPhoto from "../../assets/images/user.png";
 
 const ProfileInfo = (props) => {
 
@@ -18,7 +18,7 @@ const ProfileInfo = (props) => {
          <div className={style.user}>
             <div className={style.user__column}>
                <div className={style.user__logo}>
-                  <img src={props.profile.photos.small}/>
+                  <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}/>
                   {/*<img src='https://www.meme-arsenal.com/memes/07d24807827e03c1af085fa5f69abe0e.jpg' />*/}
                </div>
             </div>

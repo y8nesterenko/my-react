@@ -11,10 +11,6 @@ let initialState = {
         {id: 2, message: "Это мой второй пост", like: 200},
         {id: 3, message: "Это мой третий пост", like: 300},
         {id: 4, message: "Это мой четвёртый пост", like: 400},
-        {id: 5, message: "Это мой пятый пост", like: 500},
-        {id: 6, message: "Это мой шестой пост", like: 600},
-        {id: 7, message: "Это мой седьмой пост", like: 700},
-        {id: 8, message: "Это мой восьмой пост", like: 800},
     ],
     newPostText: '',
     //изначально у нас профайл не проинициализировался (профиля пока нет)
@@ -28,7 +24,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...state.posts,
-                    {id: 9, message: action.newPostText, like: 22,},
+                    {id: 5, message: action.newPostText, like: 22,},
                 ],
                 newPostText: '',
             };
