@@ -54,7 +54,7 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
-export const deletePost = (postId) => ({type: DELETE_POST, postId})
+export const deletePost = (postId) => ({type: DELETE_POST, postId});
 
 //сюда будет приходить профайл, и в экшене будет сидеть сам профайл
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
