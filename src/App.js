@@ -3,7 +3,6 @@ import './App.css';
 import {Routes, Route} from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import FriendsContainer from "./components/Friends/FriendsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -13,6 +12,7 @@ import withRouter from "./hoc/withRouter";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader";
 
+const FriendsContainer = React.lazy(() => import ("./components/Friends/FriendsContainer"));
 
 class App extends React.Component {
     componentDidMount() {
@@ -34,7 +34,7 @@ class App extends React.Component {
                         {/*через двоеточие в пути обозначаем параметр*/}
                         <Route path='/profile/:userId' element={<ProfileContainer/>}/>
                         <Route path='/dialogs' element={<DialogsContainer/>}/>
-                        <Route path='/users' element={<FriendsContainer/>}/>
+                        <Route path='/users' element={<React.Suspense fallback={<Preloader/>}><FriendsContainer/></React.Suspense>}/>
                         <Route path='/login' element={<Login/>}/>
                     </Routes>
                 </div>
