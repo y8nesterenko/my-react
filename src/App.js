@@ -29,7 +29,7 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Routes>
+                    <Routes >
 
                         {/*через двоеточие в пути обозначаем параметр*/}
                         <Route path='/profile/:userId' element={<ProfileContainer/>}/>

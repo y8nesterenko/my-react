@@ -1,14 +1,14 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile, getUserStatus, updateUserStatus} from "../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, savePhoto, updateUserStatus} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import withRouter from "../../hoc/withRouter";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
+    refreshProfile() {
         //берём из параметров URL Id пользователя
         let userId = this.props.router.params.userId;
 
@@ -26,16 +26,29 @@ class ProfileContainer extends React.Component {
         this.props.getUserStatus(userId);
     };
 
+    componentDidMount() {
+        this.refreshProfile();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.router.params.userId !== prevProps.router.params.userId) {
+            this.refreshProfile();
+        }
+    }
+
     render() {
         return (
             //прокидываем в компоненту полученные пропсы. + помимо тех пропсов, что в меня пришли, на тебе ещё профайл
             <Profile {...this.props}
+                     isOwner={this.props.router.params.userId == this.props.authorizedUserId}
                      profile={this.props.profile}
                      status={this.props.status}
-                     updateUserStatus={this.props.updateUserStatus} />
+                     updateUserStatus={this.props.updateUserStatus}
+                     savePhoto={this.props.savePhoto}/>
         )
     }
-};
+}
+;
 
 //круглые скобки перед фигурными скобками значит, что возвращается объект, а не тело функции
 let mapStateToProps = (state) => ({
@@ -46,7 +59,7 @@ let mapStateToProps = (state) => ({
 });
 
 export default compose(
-    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
+    connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus, savePhoto}),
     withRouter,
     withAuthRedirect,
 )(ProfileContainer);

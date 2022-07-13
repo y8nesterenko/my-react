@@ -36,7 +36,17 @@ export const profileAPI = {
     updateStatus(status) {
         //вторым параметром передаём payload (полезную нагрузку) в свойствах согласно требованиям сервера
         return instance.put(`profile/status`, {status: status})
-    }
+    },
+    savePhoto(photoFile) {
+        let formData = new FormData();
+        //имя файла указываем так, как написано в API документации
+        formData.append('image', photoFile);
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
 };
 
 export const authAPI = {

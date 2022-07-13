@@ -11,6 +11,12 @@ const ProfileInfo = (props) => {
       return <Preloader />
    }
 
+   const onMainPhotoSelected = (e) => {
+      if (e.target.files.length) {
+       props.savePhoto(e.target.files[0])
+      }
+   }
+
    return (
       <div>
          <div className={style.content__image}>
@@ -18,12 +24,12 @@ const ProfileInfo = (props) => {
          <div className={style.user}>
             <div className={style.user__column}>
                <div className={style.user__logo}>
-                  <img src={props.profile.photos.small != null ? props.profile.photos.small : userPhoto}/>
-                  {/*<img src='https://www.meme-arsenal.com/memes/07d24807827e03c1af085fa5f69abe0e.jpg' />*/}
+                  <img src={props.profile.photos.large != null ? props.profile.photos.small : userPhoto}/>
                </div>
             </div>
             <div className={style.user__column}>
                <div className={style.user__name}>{props.profile.fullName}</div>
+               {props.isOwner && <div>Change your avatar<br/><input type={"file"} onChange={onMainPhotoSelected}/></div>}
                <ul className={style.user__info}>
                   <li>About Me: {props.profile.aboutMe}</li>
                   <li>City: Kyiv</li>
