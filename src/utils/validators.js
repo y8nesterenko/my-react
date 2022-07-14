@@ -21,6 +21,7 @@ export const loginFormSchema = Yup.object({
         .required('Required'),
     rememberMe: Yup.boolean()
         .required('Please check the box above'),
+    captcha: Yup.string(),
 });
 
 export const newPostFormSchema = Yup.object({

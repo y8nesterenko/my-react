@@ -2,3 +2,8 @@
     color: red;
     font-weight: 700;
 }
+
+.captchaImg {
+    width: 200px;
+    border-radius: 0;
+}

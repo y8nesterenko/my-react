@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Formik} from "formik";
 import {loginFormSchema} from "../../utils/validators";
 import style from "./Login.module.css"
@@ -22,17 +22,22 @@ const Login = (props) => {
 };
 
 const LoginForm = (props) => {
+
     return (
         <Formik
             initialValues={{
                 email: '',
                 password: '',
                 rememberMe: undefined,
+                captcha: '',
             }}
             validationSchema={loginFormSchema}
-            onSubmit={(values, {setSubmitting, setStatus}) => {
-                props.login(values.email, values.password, values.rememberMe, setStatus);
-                setSubmitting(false);
+            onSubmit={(values, {setSubmitting, setStatus, setTouched}) => {
+                setSubmitting(true);
+                props.login(values.email, values.password, values.rememberMe, values.captcha, setStatus)
+                    .then(() => {
+                        setSubmitting(false);
+                    });
             }}
         >
             {({
@@ -79,6 +84,17 @@ const LoginForm = (props) => {
                     </div>
                     <div className={style.error}>{status}</div>
 
+                    {props.captchaUrl && <img className={style.captchaImg} src={props.captchaUrl}/>}
+                    {props.captchaUrl && <Input type="text"
+                                                name="captcha"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.captcha}
+                                                placeholder='Enter captcha here'
+                                                touched={touched.captcha}
+                                                error={errors.captcha}
+                    />}
+
                     <button type="submit"
                             disabled={isSubmitting}>
                         Log in
@@ -93,6 +109,7 @@ const LoginForm = (props) => {
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
     authorizedUserId: state.auth.userId,
+    captchaUrl: state.auth.captchaUrl,
 });
 
 export default connect(mapStateToProps, {login})(Login);
