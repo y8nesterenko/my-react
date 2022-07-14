@@ -3,11 +3,11 @@ import * as axios from "axios";
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
-    headers: {'API-KEY': '718c556a-277b-4513-b77b-893b6f3e2309'},
-    });
+    headers: { 'API-KEY': '718c556a-277b-4513-b77b-893b6f3e2309' },
+});
 
 export const usersAPI = {
-    getUsers (currentPage = 1, pageSize = 5) {
+    getUsers(currentPage = 1, pageSize = 5) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => {
                 return response.data;
@@ -17,7 +17,7 @@ export const usersAPI = {
         return instance.post(`follow/${userId}`)
     },
     unfollow(userId) {
-       return instance.delete(`follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
     },
     getProfile(userId) {
         console.warn('Obsolete method. Please use profileAPI object');
@@ -35,7 +35,7 @@ export const profileAPI = {
     },
     updateStatus(status) {
         //вторым параметром передаём payload (полезную нагрузку) в свойствах согласно требованиям сервера
-        return instance.put(`profile/status`, {status: status})
+        return instance.put(`profile/status`, { status: status })
     },
     savePhoto(photoFile) {
         let formData = new FormData();
@@ -59,7 +59,7 @@ export const authAPI = {
     //для rememberMe заглушка - если не прийдёт, будет false
     login(email, password, rememberMe = false, captcha = null) {
         return instance.post('auth/login',
-            {email, password, rememberMe, captcha}
+            { email, password, rememberMe, captcha }
         )
     },
     logout() {

@@ -1,4 +1,4 @@
-import {profileAPI, usersAPI} from "../api/api";
+import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const DELETE_POST = 'DELETE_POST';
@@ -8,10 +8,10 @@ const SAVE_PHOTO_SUCCES = 'profilePage/SAVE_PHOTO_SUCCES';
 
 let initialState = {
     posts: [
-        {id: 1, message: "Это мой первый пост", like: 100},
-        {id: 2, message: "Это мой второй пост", like: 200},
-        {id: 3, message: "Это мой третий пост", like: 300},
-        {id: 4, message: "Это мой четвёртый пост", like: 400},
+        { id: 1, message: "Это мой первый пост", like: 100 },
+        { id: 2, message: "Это мой второй пост", like: 200 },
+        { id: 3, message: "Это мой третий пост", like: 300 },
+        { id: 4, message: "Это мой четвёртый пост", like: 400 },
     ],
     newPostText: '',
     //изначально у нас профайл не проинициализировался (профиля пока нет)
@@ -25,7 +25,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...state.posts,
-                    {id: 5, message: action.newPostText, like: 22,},
+                { id: 5, message: action.newPostText, like: 22, },
                 ],
                 newPostText: '',
             };
@@ -49,21 +49,21 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_PHOTO_SUCCES:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos},
+                profile: { ...state.profile, photos: action.photos },
             }
         default:
             return state;
     }
 };
 
-export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
-export const deletePost = (postId) => ({type: DELETE_POST, postId});
+export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostText });
+export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 
 //сюда будет приходить профайл, и в экшене будет сидеть сам профайл
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 
-const setUserStatus = (status) => ({type: SET_STATUS, status});
-const savePhotoSucces = (photos) => ({type: SAVE_PHOTO_SUCCES, photos});
+const setUserStatus = (status) => ({ type: SET_STATUS, status });
+const savePhotoSucces = (photos) => ({ type: SAVE_PHOTO_SUCCES, photos });
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
@@ -84,11 +84,14 @@ export const getUserStatus = (userId) => (dispatch) => {
 export const updateUserStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(setUserStatus(status))
-                }
+            if (response.data.resultCode === 0) {
+                dispatch(setUserStatus(status))
             }
+        }
         )
+        .catch(error => {
+            console.log(error);
+        })
 }
 
 export const savePhoto = (file) => async (dispatch) => {
