@@ -48,3 +48,11 @@ textarea.posts__text {
   color: #fff;
   margin: 0 10px 10px 0;
 }
+.contacts {
+  margin-left: 15px;
+}
+
+.error {
+  color: red;
+  font-weight: 700;
+}

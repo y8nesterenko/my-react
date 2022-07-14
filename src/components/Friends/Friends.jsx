@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Friends.module.css';
 import userPhoto from '../../assets/images/user.png';
 import {NavLink} from "react-router-dom";
@@ -40,8 +40,8 @@ const Friends = (props) => {
                             <div className={style.info__row}>{friends.status}</div>
                         </div>
                         <div className={style.info__column + ' ' + style.info__column_right}>
-                            <div className={style.info__row}>{'friends.location.country'},</div>
-                            <div className={style.info__row}>{'friends.location.city'}</div>
+                            <div className={style.info__row}>{friends.aboutMe}</div>
+                            <div className={style.info__row}>{friends.lookingForAJobDescription}</div>
                         </div>
                     </div>
                 </div>
