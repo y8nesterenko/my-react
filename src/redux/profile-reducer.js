@@ -8,10 +8,10 @@ const SAVE_PHOTO_SUCCES = 'profilePage/SAVE_PHOTO_SUCCES';
 
 let initialState = {
     posts: [
-        { id: 1, message: "Это мой первый пост", like: 100 },
-        { id: 2, message: "Это мой второй пост", like: 200 },
-        { id: 3, message: "Это мой третий пост", like: 300 },
-        { id: 4, message: "Это мой четвёртый пост", like: 400 },
+        { id: 1, message: "Some chilling in Dubai", img: 'https://klike.net/uploads/posts/2020-01/1580115790_1.jpg', info: 'Dubai, 15 minutes ago', like: 100 },
+        { id: 2, message: "Rome weekends", img: 'https://klike.net/uploads/posts/2018-07/1531566244_2.jpg', info: 'Rome, 5 month ago', like: 200 },
+        { id: 3, message: "At fottball game in Barcelona", img: 'https://klike.net/uploads/posts/2020-09/1599300918_18.jpg', info: 'Barcelona 9 month age, 15 minutes age', like: 300 },
+        { id: 4, message: "London is a capital of Great Britain", img: 'https://klike.net/uploads/posts/2020-03/1584522931_8.jpg', info: 'London, 1 year ago', like: 400 },
     ],
     newPostText: '',
     //изначально у нас профайл не проинициализировался (профиля пока нет)

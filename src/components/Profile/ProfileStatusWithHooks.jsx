@@ -25,8 +25,7 @@ const ProfileStatusWithHooks = (props) => {
     );
 
     return (
-        <div> Status:
-            {!editMode &&
+        <span>{!editMode &&
                 <span className={style.statusBlock}>
                         {status || "This user hasn't set status"}
                     <span onClick={editModeOn} className={style.editStatus}>&#128393;</span>
@@ -40,7 +39,7 @@ const ProfileStatusWithHooks = (props) => {
                     onChange={onUserStatusChange}
                 />
             }
-        </div>
+        </span>
     )
 };
 

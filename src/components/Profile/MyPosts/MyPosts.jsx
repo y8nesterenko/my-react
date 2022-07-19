@@ -4,8 +4,26 @@ import style from './MyPosts.module.css';
 import {Formik} from "formik";
 import {newPostFormSchema} from "../../../utils/validators";
 import {Input} from "../../Forms/Forms";
+import userPhoto from "../../../assets/images/user.png";
+import Preloader from '../../common/Preloader';
+
+//React.memo - аналог shouldComponentUpdate для классовой компоненты
+const MyPosts = React.memo ((props) => {
+    let postsElements = props.posts.map(
+        (post) => <Post like={post.like} message={post.message} img={post.img} key={post.id} id={post.id} info={post.info} {...props}/>);
+    return (
+        <div>
+
+            <AddPostForm addPost={props.addPost} {...props}/>
+            <h2 className='postsTitle'>Posts</h2>
+            {postsElements}
+        </div>);
+});
 
 const AddPostForm = (props) => {
+    if (!props.profile) {
+        return <Preloader />;
+      }
 
     return (
         <Formik
@@ -13,6 +31,7 @@ const AddPostForm = (props) => {
             validationSchema={newPostFormSchema}
             onSubmit={(values) => {
                 props.addPost(values.newPostText);
+                values.newPostText = '';
             }}
         >
             {({
@@ -25,10 +44,13 @@ const AddPostForm = (props) => {
                   isSubmitting,
                   /* and other goodies */
               }) => (
-                <form onSubmit={handleSubmit}>
+                <form className='createPost' onSubmit={handleSubmit}>
+                    <div className="profilePicture">        
+                        <img src={props.profile.photos.large != null ? props.profile.photos.small : userPhoto} />
+                    </div>
                     <Input
                         {...props}
-                        type="textarea"
+                        type="text"
                         name="newPostText"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -36,30 +58,20 @@ const AddPostForm = (props) => {
                         placeholder='Enter your post'
                         touched={touched.newPostText}
                         error={errors.newPostText}
+                        id='createPost'
                     />
 
-                    <button type="submit"
+                        <button type="submit"
+                    className='btn btn-primary'
                         //disabled={isSubmitting}
                     >
                         Add post
-                    </button>
+                        </button>
                 </form>
             )}
         </Formik>
     )
 };
-
-//React.memo - аналог shouldComponentUpdate для классовой компоненты
-const MyPosts = React.memo ((props) => {
-    let postsElements = props.posts.map(
-        (post) => <Post like={post.like} message={post.message} key={post.id} id={post.id}/>);
-    return (
-        <div className={style.posts}>
-            <h2 className={style.posts__title}>My posts</h2>
-            <AddPostForm addPost={props.addPost}/>
-            {postsElements}
-        </div>);
-});
 
 /*refactor to classComponent (Ctrl + Shift + Alt + T)
 class MyPosts extends React.Component {

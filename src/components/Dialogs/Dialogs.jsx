@@ -18,14 +18,24 @@ const Dialogs = (props) => {
     }
 
     return (
-        <div className={style.dialogs}>
-            <div className={style.dialogs__items}>
-                {dialogsElements}
+        <div className='messages'>
+            <div className="messagesHeading">
+                <h2>Messages</h2>
             </div>
-            <div className={style.messages}>
-                {messagesElements}
+
+            <div className="searchBar">
+                <i className="uil uil-search"></i>
+                <input type="search" placeholder="search message" id="messageSearch"/>
             </div>
-            <AddMessageForm sendMessage={props.sendMessage}/>
+            <div className="messagesBody">
+                <div className="dialogItem">
+                    {dialogsElements}
+                </div>
+                <div className="messagesItems">
+                    {messagesElements}
+                    <AddMessageForm sendMessage={props.sendMessage}/>
+                </div>
+            </div>            
         </div>
     );
 }

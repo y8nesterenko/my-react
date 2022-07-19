@@ -14,9 +14,11 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <h1>Please login in the form below </h1>
+        <div className={style.title}>
+          <h2>Please login in the form below </h2>
+        <div className={style.container}>
             <LoginForm {...props}/>
+        </div>
         </div>
     )
 };
@@ -52,7 +54,9 @@ const LoginForm = (props) => {
                   /* and other goodies */
               }) => (
 
-                <form onSubmit={handleSubmit}>
+                <form className={style.form} onSubmit={handleSubmit}>
+                                        <div className={style.error}>{status}</div>
+                    <div className={style.field}>
                     <Input type="email"
                            name="email"
                            onChange={handleChange}
@@ -62,6 +66,8 @@ const LoginForm = (props) => {
                            touched={touched.email}
                            error={errors.email}
                     />
+                    </div>
+                    <div className={style.field}>
                     <Input type="password"
                            name="password"
                            onChange={handleChange}
@@ -71,21 +77,24 @@ const LoginForm = (props) => {
                            touched={touched.password}
                            error={errors.password}
                     />
-                    <div>
-                        <input
+                    </div>
+                    <div className={style.checkBox}>
+                        <input 
                             type="checkbox"
                             name="rememberMe"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.rememberMe}
-                        />remember me
+                        /><span className={style.rememberMe}>remember me</span>
                         <div
                             className={style.error}>{errors.rememberMe && touched.rememberMe && errors.rememberMe}</div>
                     </div>
-                    <div className={style.error}>{status}</div>
+
 
                     {props.captchaUrl && <img className={style.captchaImg} src={props.captchaUrl}/>}
-                    {props.captchaUrl && <Input type="text"
+                    {props.captchaUrl && 
+                    <div className={style.field}>
+                    <Input type="text"
                                                 name="captcha"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
@@ -93,9 +102,10 @@ const LoginForm = (props) => {
                                                 placeholder='Enter captcha here'
                                                 touched={touched.captcha}
                                                 error={errors.captcha}
-                    />}
+                    />
+                    </div>}
 
-                    <button type="submit"
+                    <button className="btn" type="submit"
                             disabled={isSubmitting}>
                         Log in
                     </button>

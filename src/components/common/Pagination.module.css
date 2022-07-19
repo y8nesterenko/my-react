@@ -5,11 +5,30 @@
 }
 
 button {
+    display: inline-block;
+    padding: 10px;
+    font-weight: 500;
+    border-radius: var(--border-radius);
     cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    background-color: var(--color-white);
+    margin-right: 5px;
+    font-family: inherit;
 }
 
+button:hover {
+    opacity: 0.2;
+  }
+
+button:disabled:hover {
+      opacity: 1;
+  }
+
 .selectedPage {
-    color: #000;
-    font-weight: 700;
-    font-size: 18px;
+    background-color: var(--color-primary);
+    margin-top: 5px;
+    min-width: fit-content;
+    min-height: fit-content;
+    font-weight: 600;
 }

@@ -33,6 +33,7 @@ class FriendsContainer extends React.Component {
             //оборачиваем компонент Friends пустым элементом (фрагментом)
             <>
                 {this.props.isFetching ? <Preloader/> : null}
+                
                 <Friends
                     totalFriendsCount={this.props.totalFriendsCount}
                     pageSize={this.props.pageSize}

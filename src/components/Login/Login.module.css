@@ -1,9 +1,64 @@
-.error {
-    color: red;
-    font-weight: 700;
+.container {
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    padding: 2rem 0; 
+    font-size: 1.4rem;
+    margin-top: 1rem;   
+}
+
+.title {
+    text-align: center;
+}
+
+.form {
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);    
+    padding: 1rem;
+    min-width: 30vw;
+}
+
+.field input {
+    font-size: 1rem;
+    color: var(--color-gray);
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius);    
+    padding: 1rem;
+    text-align: center;
+}
+
+.field input::placeholder {
+    text-align: center;
+}
+
+.checkBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.rememberMe {
+    margin-left: 0.5rem;
 }
 
 .captchaImg {
-    width: 200px;
-    border-radius: 0;
+    width: 70%;
+    border-radius: var(--border-radius);
+    margin: 0 auto 1rem;
+}
+
+
+.error {
+    color: rgb(247, 167, 167);
+    text-decoration: underline;
+    font-size: 0.8rem;
+    text-align: center;
+    display: block;
+    text-transform: lowercase;
+    margin: -1rem 0 1rem;
 }

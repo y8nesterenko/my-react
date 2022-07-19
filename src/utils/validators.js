@@ -19,8 +19,7 @@ export const loginFormSchema = Yup.object({
         .min(2, 'Must be longer than 2 characters')
         .max(30, 'Must be 30 characters or less')
         .required('Required'),
-    rememberMe: Yup.boolean()
-        .required('Please check the box above'),
+    rememberMe: Yup.boolean(),
     captcha: Yup.string(),
 });
 

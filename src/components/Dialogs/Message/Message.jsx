@@ -3,8 +3,8 @@ import style from "./Message.module.css";
 
 const Message = (props) => {
    return (
-        <div className={`${style[props.type]}`}>
-            <p className={style.text}>{props.message}</p>
+        <div className={`message ${style[props.type]}`}>
+            {props.message}
         </div>
     );
 };

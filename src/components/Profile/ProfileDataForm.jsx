@@ -7,6 +7,14 @@ import Preloader from "../common/Preloader";
 
 const ProfileDataForm = (props) => {
     return (
+<>
+<div className="profileInfo">
+<div className="profilePictureBlock">
+  <div className="profilePicture">        
+    <img src={props.profile.photos.large != null ? props.profile.photos.small : userPhoto} />
+  </div>
+</div>
+
         <Formik
             initialValues={{
                 fullName: props.profile.fullName,
@@ -43,22 +51,62 @@ const ProfileDataForm = (props) => {
               }) => (
                 <form name='edit-profile' onSubmit={handleSubmit} className={style.user}>
                     {isSubmitting && <Preloader/>}
+                    <div className="profileItems">
+  <p><span className="textBold">Name: </span><input
+                            type="textarea"
+                            name="fullName"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.fullName}
+                        /></p>
+  <p><span className="textBold">About Me: </span><input
+                                    name="aboutMe"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.aboutMe}
+                                /></p>
+  <p><span className="textBold">Looking for a job: </span><input
+                                    type="checkbox"
+                                    name="lookingForAJob"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.lookingForAJob}
+                                />
+      {props.profile.lookingForAJob && (<p><span className="textBold">My professional skills: </span><input
+                                    name="lookingForAJobDescription"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.lookingForAJobDescription}
+                                /></p>)}
+  </p>
+
+  <p><span className="textBold">Contacts:{Object.keys(props.profile.contacts).map(key => {
+                                return (
+                                    <div key={`contacts.${key}`}>
+                                        {key} : <input
+                                        type="text"
+                                        name={`contacts.${key}`}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.contacts[key]}
+                                    />
+                                        <span
+                                            className={style.error}>{status}
+                                        </span>
+                                    </div>)
+                            })}</span></p>
+  </div>
                     <div className={style.user__column}>
-                        <div className={style.user__logo}>
-                            <img src={props.profile.photos.large != null ? props.profile.photos.small : userPhoto}/>
-                        </div>
-                    </div>
-                    <div className={style.user__column}>
-                        <div className={style.user__name}>
+                        {/* <div className={style.user__name}>
                             Name: <input
                             type="textarea"
                             name="fullName"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.fullName}
-                        /></div>
+                        /></div> */}
 
-                        <ul className={style.user__info}>
+                        {/* <ul className={style.user__info}>
                             <li>
                                 About Me:
                                 <textarea
@@ -101,17 +149,26 @@ const ProfileDataForm = (props) => {
                                         </span>
                                     </div>)
                             })}</li>
-                        </ul>
+                        </ul> */}
+                        <div className="buttons">
                         {props.isOwner &&
-                            <button type="submit"
+                            <button className="btn btn-primary btnSaveChanges" type="submit"
                                     disabled={isSubmitting}>
                                 Save changes
                             </button>}
+                            <button className="btn" onClick={() => {
+                                props.editModeOff()
+                            }}>
+                        Cancel
+                    </button>
+                    </div>
 
                     </div>
                 </form>
             )}
         </Formik>
+        </div>
+        </>
     )
 };
 

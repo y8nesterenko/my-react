@@ -22,7 +22,7 @@ const Pagination = (props) => {
         <div>
             {/*выводим кнопки пагинации для отображения пользователей*/}
             <div className={style.pagination}>
-                <button onClick={(e) => {
+                <button disabled={props.currentPage === 1} onClick={(e) => {
                     props.onPageChanged(pages[0]);
                 }}>start
                 </button>
@@ -51,7 +51,7 @@ const Pagination = (props) => {
                     }}>next
                     </button>
 
-                <button onClick={(e) => {
+                <button disabled={props.currentPage === pages.length} onClick={(e) => {
                     props.onPageChanged(pages.length);
                 }}>end
                 </button>

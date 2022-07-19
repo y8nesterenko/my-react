@@ -38,13 +38,16 @@ class App extends React.Component {
         }
 
         return (
-            <div className='app-wrapper'>
+            <div className='appWrapper'>
                 <HeaderContainer />
-                <Navbar userId={this.props.userId} />
-                <div className="app-wrapper-content">
-                    <Routes >
+                <main>
+                    <div className='container'>
+                        <Navbar profile={this.props.profile} userId={this.props.userId} login={this.props.login} />
 
+                    <div className='content'>
+                    <Routes>
                         {/*через двоеточие в пути обозначаем параметр*/}
+
                         <Route path='/profile/:userId' element={<ProfileContainer />} />
                         <Route path='/dialogs' element={<DialogsContainer />} />
                         <Route path='/users' element={<React.Suspense fallback={<Preloader />}><FriendsContainer /></React.Suspense>} />
@@ -52,7 +55,9 @@ class App extends React.Component {
                         <Route exact path='/' element={<Navigate to={`/profile/${this.props.userId}`} />} />
                         <Route exact path='*' element={<div>404 Page not found</div>} />
                     </Routes>
-                </div>
+                    </div>
+                    </div>
+                </main>
             </div>
         );
     }
@@ -61,6 +66,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
     userId: state.auth.userId,
+    profile: state.profilePage.profile,
+    login: state.auth.login,
 });
 
 export default compose(

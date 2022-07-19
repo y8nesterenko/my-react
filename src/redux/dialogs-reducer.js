@@ -50,15 +50,15 @@ let initialState = {
     ],
 
     messages: [
-        {id: 1, message: "Сообщение 1", type: "income"},
-        {id: 2, message: "Сообщение 2", type: "outcome"},
-        {id: 3, message: "Сообщение 3", type: "income"},
-        {id: 4, message: "Сообщение 4", type: "outcome"},
-        {id: 5, message: "Сообщение 5", type: "income"},
-        {id: 6, message: "Сообщение 6", type: "outcome"},
-        {id: 7, message: "Сообщение 7", type: "income"},
-        {id: 8, message: "Сообщение 8", type: "outcome"},
-        {id: 9, message: "Сообщение 9", type: "income"},
+        {id: 1, message: "Hi, friend", type: "income"},
+        {id: 2, message: "How are you? Long time no see", type: "income"},
+        {id: 3, message: "Hello! I'm fine. Thank u. Where have you been all time long. I miss you so much", type: "outcome"},
+        {id: 4, message: "I've been traveling abroad. So i can't reach you ", type: "outcome"},
+        {id: 5, message: "Oh, undersood. What countries have you been to?", type: "income"},
+        {id: 6, message: "Spain, Italy and Greece", type: "outcome"},
+        {id: 7, message: "Next time please invite me with you", type: "income"},
+        {id: 8, message: "Agreed", type: "outcome"},
+        {id: 9, message: "Bye", type: "outcome"},
     ],
 };
 

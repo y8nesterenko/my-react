@@ -23,7 +23,7 @@ export const AddMessageForm = (props) => {
                   isSubmitting,
                   /* and other goodies */
               }) => (
-                <form onSubmit={handleSubmit}>
+                <form className="sendMessageForm" onSubmit={handleSubmit}>
                     <Input
                         {...props}
                         type='textarea'
@@ -35,7 +35,7 @@ export const AddMessageForm = (props) => {
                         touched={touched.newMessageBody}
                         error={errors.newMessageBody}
                     />
-                    <button type="submit"
+                    <button className="btn btnSendMessage" type="submit"
                         //disabled={isSubmitting}
                     >
                         Send message
