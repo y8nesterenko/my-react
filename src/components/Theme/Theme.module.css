@@ -1,0 +1,166 @@
+.customizeTheme {
+    background-color: var(--color-white);
+z-index: 100;
+text-align: center;
+display: grid;
+place-items: center;
+font-size: 0.9rem;
+border-radius: 15px;
+margin-top: 1rem;
+}
+
+.card {
+    padding: 3rem;
+    border-radius: var(--card-border-radius);
+    width: 50%;
+}
+
+.fontSize {
+    margin-top: 5rem;
+}
+
+.fontSize > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-light);
+    padding: var(--search-padding);
+    border-radius: var(--card-border-radius);
+}
+
+.chooseSize {
+    background-color: var(--color-secondary);
+    height: 0.3rem;
+    width: 100%;
+    margin: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chooseSize span {
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+span.fontSize1 {
+    width: 0.6rem;
+    height: 0.6rem;
+}
+
+span.fontSize2 {
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+span.fontSize3 {
+    width: 1rem;
+    height: 1rem;
+}
+
+span.fontSize4 {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+span.fontSize5 {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.chooseSize span.active {
+    background-color: var(--color-primary);
+}
+
+.color {
+    margin-top: 2rem;
+}
+
+.chooseColor {
+    background-color: var(--color-light);
+    padding: var(--search-padding);
+    border-radius: var(--card-border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chooseColor span {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+}
+
+.chooseColor span:nth-child(1) {
+    background-color: hsl(255, 75%, 60%);
+}
+
+.chooseColor span:nth-child(2) {
+    background-color: hsl(52, 75%, 60%);
+}
+
+.chooseColor span:nth-child(3) {
+    background-color: hsl(352, 75%, 60%);
+}
+
+.chooseColor span:nth-child(4) {
+    background-color: hsl(152, 75%, 60%);
+}
+
+.chooseColor span:nth-child(5) {
+    background-color: hsl(202, 75%, 60%);
+}
+
+.chooseColor span.active {
+    border: 5px solid rgb(230, 136, 4);
+}
+
+.background {
+    margin-top: 2rem;
+}
+
+.chooseBg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.chooseBg > div {
+    padding: var(--card-padding);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+
+.chooseBg > div.active {
+    border: 3px solid var(--color-primary);
+}
+
+.chooseBg > div span {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--color-gray);
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.bg1 {
+    background-color: white;
+    color: black;
+}
+
+.bg2 {
+    background-color: hsl(252, 30%, 17%);
+    color: white;
+}
+
+.bg3 {
+    background-color: hsl(252, 30%, 10%);
+    color: white;
+}

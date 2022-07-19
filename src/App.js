@@ -11,6 +11,8 @@ import { compose } from "redux";
 import withRouter from "./hoc/withRouter";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader";
+import Settings from './components/Settings/Settings';
+import Theme from './components/Theme/Theme';
 
 const FriendsContainer = React.lazy(() => import("./components/Friends/FriendsContainer"));
 
@@ -52,6 +54,8 @@ class App extends React.Component {
                         <Route path='/dialogs' element={<DialogsContainer />} />
                         <Route path='/users' element={<React.Suspense fallback={<Preloader />}><FriendsContainer /></React.Suspense>} />
                         <Route path='/login' element={<Login />} />
+                        <Route path='/theme' element={<Theme/>} />
+                        <Route path='/settings' element={<Settings/>} />
                         <Route exact path='/' element={<Navigate to={`/profile/${this.props.userId}`} />} />
                         <Route exact path='*' element={<div>404 Page not found</div>} />
                     </Routes>
