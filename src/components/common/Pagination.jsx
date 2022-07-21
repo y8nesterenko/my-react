@@ -19,7 +19,7 @@ const Pagination = (props) => {
     let slicedPages = pages.slice(curPF, curPL);
 
     return (
-        <div>
+        <div className={style.paginationBlock}>
             {/*выводим кнопки пагинации для отображения пользователей*/}
             <div className={style.pagination}>
                 <button disabled={props.currentPage === 1} onClick={(e) => {

@@ -1,5 +1,5 @@
 .pagination {
-    width: 800px;
+    width: 90%;
     text-align: center;
     margin: 0 auto;
 }
@@ -31,4 +31,14 @@ button:disabled:hover {
     min-width: fit-content;
     min-height: fit-content;
     font-weight: 600;
+}
+
+@media screen and (max-width: 426px) {
+    .pagination {
+        width: 100%;
+    }
+    
+    button {
+        margin-top: 0.5rem;
+    }
 }

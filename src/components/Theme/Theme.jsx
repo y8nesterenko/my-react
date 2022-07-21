@@ -40,7 +40,7 @@ const Theme = (props) => {
         <div className={style.background}>
           <h4>Background</h4>
           <div className={style.chooseBg}>
-            <div className={style.bg1  + " " + style.active}>
+            <div className={style.bg1 + " " + style.active}>
               <span></span>
               <h5 htmlFor={style.bg1}>Light</h5>
             </div>

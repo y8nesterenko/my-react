@@ -1,12 +1,12 @@
 .customizeTheme {
     background-color: var(--color-white);
-z-index: 100;
-text-align: center;
-display: grid;
-place-items: center;
-font-size: 0.9rem;
-border-radius: 15px;
-margin-top: 1rem;
+    z-index: 100;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    font-size: 0.9rem;
+    border-radius: 15px;
+    margin-top: 1rem;
 }
 
 .card {
@@ -19,7 +19,7 @@ margin-top: 1rem;
     margin-top: 5rem;
 }
 
-.fontSize > div {
+.fontSize>div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -127,7 +127,7 @@ span.fontSize5 {
     gap: 1.5rem;
 }
 
-.chooseBg > div {
+.chooseBg>div {
     padding: var(--card-padding);
     width: 100%;
     display: flex;
@@ -138,11 +138,11 @@ span.fontSize5 {
     cursor: pointer;
 }
 
-.chooseBg > div.active {
+.chooseBg>div.active {
     border: 3px solid var(--color-primary);
 }
 
-.chooseBg > div span {
+.chooseBg>div span {
     width: 2rem;
     height: 2rem;
     border: 2px solid var(--color-gray);
@@ -163,4 +163,37 @@ span.fontSize5 {
 .bg3 {
     background-color: hsl(252, 30%, 10%);
     color: white;
+}
+
+@media screen and (max-width: 968px) {
+    .chooseBg {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .card {
+        padding: 0;
+        width: 90%;
+    }    
+
+    .chooseSize {
+        margin: 0 0 0 0.5rem;
+    }
+
+    .fontSize>div {
+        display: block;
+        padding-left: 0;
+        padding-right: 1rem;
+    }
+
+    .customizeTheme h2, h3, h4, h6 {
+        margin: 1rem 0;
+}
+
+.background {
+    margin-bottom: 140px;
+}
+
+.fontSize {
+    margin-top: 2rem;
+}
 }
