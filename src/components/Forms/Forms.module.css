@@ -5,17 +5,19 @@
 .field input {
     font-size: 1rem;
     color: var(--color-gray);
-    margin-bottom: 1rem;
     background-color: var(--color-white);
     border-radius: var(--border-radius);    
-    padding: 1rem;
     text-align: center;
+    padding-left: 0;
 }
 
 .field input::placeholder {
     text-align: center;
 }
 
+.field .input {
+    padding-left: 0;
+}
 
 .error {
     color: red;
@@ -24,6 +26,6 @@
     text-align: center;
     display: block;
     text-transform: lowercase;
-    margin: -1rem 0 1rem;
+    /* margin: -1rem 0 1rem; */
 }
 

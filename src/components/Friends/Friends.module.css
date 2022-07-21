@@ -77,3 +77,15 @@ margin-right: 1rem;
 button {
     cursor: pointer;
 }
+
+@media screen and (max-width: 968px) {
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 1.7rem;
+  margin: 1.5rem 0;
+      }
+
+      .card {
+      }
+
+}    

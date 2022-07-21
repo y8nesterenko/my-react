@@ -26,27 +26,16 @@ background-color: hsl(252, 30%, 95%);
   color: hsl(252, 75%, 60%);
 }
 
-
-/* .nav {
-   grid-area: nav;
-   border: 1px solid #000;
-   background-color: skyblue;
- }
- 
- .nav a {
-   display: block;
-   margin-left: 5px;
- }
-
- .item {
-   color: #fff;
-   text-decoration: none;
- }
-
- .item:hover {
-  text-decoration: underline;
+/* MEDIA QUERIES FAR SMALL LAPTOPS AND MOBILE PHONES */
+@media screen and (max-width: 992px) {
+  .menuItem {
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
 }
-
-.active {
-  color: gold;
-} */
+@media screen and (max-width: 468px) {
+  .menuItem span i {
+    margin-left: 0;
+  }
+}

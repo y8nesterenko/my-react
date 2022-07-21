@@ -53,11 +53,26 @@ main {
 
 main .container {
   display: grid;
-  grid-template-columns: 22vw auto;
+  grid-template-columns: 15vw auto;
   column-gap: 2rem;
   position: relative;
   top: 5.6rem;
 }
+
+.preloader {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  overflow: hidden;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  background-color: rgba(58, 58, 58, 0.74);
+}
+
 
 /* GENERAL */
 
@@ -106,9 +121,9 @@ img {
 }
 
 .btnLogout {
-padding: 10px;
-background-color: var(--color-gray);
-font-family: inherit;
+  padding: 10px;
+  background-color: var(--color-gray);
+  font-family: inherit;
 }
 
 .btnSaveChanges {
@@ -163,7 +178,7 @@ form.sendMessageForm textarea::placeholder {
 header {
   width: 100%;
   background-color: var(--color-white);
-  padding: 0.7rem 0;
+  padding: 0.5rem 0;
   position: fixed;
   top: 0;
   z-index: 10;
@@ -206,10 +221,10 @@ header .searchBar input::placeholder {
 /* NAVBAR */
 
 .navbar {
-height: max-content;
-position: sticky;
-top: 5.4rem;
-margin-top: 1rem;
+  height: max-content;
+  position: sticky;
+  top: 5.4rem;
+  margin-top: 1rem;
 }
 
 .navbar .profile {
@@ -238,7 +253,7 @@ margin-top: 1rem;
 
 .navbar .sidebar i .notificationCount {
   background: var(--color-danger);
-  color: white;  
+  color: white;
   font-size: 0.7rem;
   width: fit-content;
   border-radius: 0.8rem;
@@ -257,18 +272,20 @@ margin-top: 1rem;
 /*-----------------CONTENT-----------------*/
 
 .story .profilePicture {
-  display: inline-block;  
+  display: inline-block;
 }
 
 .profileInfo {
+  margin-top: 1rem;
   padding: 15px;
   border-radius: 10px;
   background: url("https://img.redbull.com/images/w_3000/q_auto,f_auto/redbullcom/2018/12/10/c16fc793-a864-44c5-affe-ea590376b54d/kauai-county-united-states") 0 0/cover no-repeat;
 }
 
 .profilePictureBlock {
-    display: flex;
- align-items: center;}
+  display: flex;
+  align-items: center;
+}
 
 input#uploadPhoto {
   display: none;
@@ -319,7 +336,7 @@ input#uploadPhoto {
 .content .createPost input[type='text'] {
   justify-self: center;
   width: 100%;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   background: transparent;
   color: var(--color-dark);
   margin-right: 1rem;
@@ -330,7 +347,6 @@ input#uploadPhoto {
   padding: 10px;
   width: fit-content;
   height: fit-content;
-  min-width: 85px;
 }
 
 
@@ -454,21 +470,121 @@ input#uploadPhoto {
   margin: 10px 0;
 }
 
-.preloader {
-  width: 100%;
-  height: 100%;
-position: fixed;
-top: 0;
-left: 0;
-z-index: 101;
-  overflow: hidden;
-  text-align: center;
-  display: grid;
-  place-items: center;  
-  background-color: rgba(58, 58, 58, 0.74);
+/* MEDIA QUERIES FAR SMALL LAPTOPS AND BIG TABLETS */
+@media screen and (max-width: 1200px) {
+  header .container {
+    width: 96%;
+  }
+
+  main .container {
+    grid-template-columns: 7vw auto;
+    gap: 1rem;
+  }
+
+  .navbar {
+    width: 7vw;
+    z-index: 5;
+  }
+
+  .navbar .profile {
+    display: none;
+  }
+
+  .navbar .sidebar h3 {
+    display: none;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* MEDIA QUERIES FAR SMALL LAPTOPS AND MOBILE PHONES */
+@media screen and (max-width: 992px) {
+  header .searchBar {
+    display: none;
+  }
+
+  .container {
+    width: 96%;
+  }
+
+  main .container {
+    grid-template-columns: 0 auto;
+    /* gap: 0; */
+  }
+
+  .content {
+    grid-column: 1/3;
+    width: 85vw;
+  }
+
+  .navbar {
+    grid-column: 3/4;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 1rem;
+    justify-items: center;
+  }
+
+  .navbar .sidebar i {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 426px) {
+
+  main .container {
+    display: block;
+    width: 87%;
+  }
+
+  .content {
+  }
+
+  .profilePictureBlock {
+    display: block;
+  }
+
+  .profilePictureBlock .btn {
+    margin-left: 0;
+  }
+
+  .navbar {
+    position: fixed;
+    display: grid;
+    transform: rotate(-90deg);
+    margin-right: 50%;
+    top: 75%; 
+  }
+
+  .navbar .sidebar {
+    background-color: var(--color-secondary);
+
+  }
+
+  .navbar .sidebar i {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-left: 0;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+  }
+
+  .navbar .sidebar i::before {
+    transform: rotate(90deg);
+  }
+
+  .navbar .sidebar i small {
+    transform: rotate(90deg);
+
+  }
+
+  .navbar .sidebar i .notificationCount {
+    top: 2.6rem;
+    right: 0.8rem;
+  }
+
+  .post:last-of-type {
+    margin-bottom: 200px;
+  }
 }

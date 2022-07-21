@@ -18,9 +18,6 @@ const Header = (props) => {
           <input type="search" placeholder="Enter request" />
         </div>
         <div className="create">
-          <label className="btn btn-primary" htmlFor="createPost">
-            Create
-          </label>
 
           {props.isAuth ? (
             <div>
