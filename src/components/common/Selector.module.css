@@ -1,0 +1,18 @@
+.selector {
+  display: inline-block;
+  padding: 0.4rem 0.6rem;;
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 300ms ease;
+  font-size: var(--font-size-standart);
+  font-family: inherit;
+}
+
+.selector option {
+  padding: 0.4rem 0.6rem;;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: var(--font-size-standart);
+  font-family: inherit;
+}
