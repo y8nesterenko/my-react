@@ -1,14 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root {
-  --color-white: hsl(252, 30%, 100%);
-  --color-light: hsl(252, 30%, 95%);
+  --primary-color-hue: 252;
+  --dark-color-lightness: 17%;
+  --light-color-lightness: 95%;
+  --white-color-lightness: 100%;
+
+  --color-white: hsl(252, 30%, var(--white-color-lightness));
+  --color-light: hsl(252, 30%, var(--light-color-lightness));
   --color-gray: hsl(252, 15%, 65%);
-  --color-primary: hsl(252, 75%, 60%);
+  --color-primary: hsl(var(--primary-color-hue), 75%, 60%);
   --color-secondary: hsl(252, 100%, 90%);
   --color-success: hsl(120, 95%, 65%);
   --color-danger: hsl(0, 95%, 65%);
-  --color-dark: hsl(252, 30%, 17%);
+  --color-dark: hsl(252, 30%, var(--dark-color-lightness));
   --color-black: hsl(252, 30%, 10%);
 
   --border-radius: 2rem;
@@ -16,6 +21,9 @@
   --btn-padding: 0.6rem 2rem;
   --search-padding: 0.6rem 1rem;
   --card-padding: 1rem;
+
+  --font-size-standart: 0.9rem;
+  --font-size-big: 1.4rem;
 }
 
 *,
@@ -33,7 +41,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: var(--color-dark);
-  background: var(--color-light);
+  background-color: var(--color-light);
   overflow-x: hidden;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -96,6 +104,12 @@ img {
   position: absolute;
 }
 
+.postUser .profilePicture {
+  height: 4rem;
+  aspect-ratio: 1/1;
+  align-self: center;
+}
+
 .btn {
   display: inline-block;
   padding: var(--btn-padding);
@@ -103,7 +117,7 @@ img {
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 300ms ease;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   font-family: inherit;
 }
 
@@ -113,7 +127,7 @@ img {
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: white;
+  color: var(--color-white);
   height: 20px;
   width: 50px;
   margin-top: 5px;
@@ -140,6 +154,15 @@ img {
   margin-left: auto;
 }
 
+.btnDelete {
+  background-color: var(--color-danger);
+}
+
+.btnDelete:hover {
+  color: var(--color-white);
+  opacity: 1;
+}
+
 form.sendMessageForm {
   display: flex;
   justify-content: space-between;
@@ -153,7 +176,7 @@ form.sendMessageForm textarea {
   border-radius: 15px;
   padding: 0.6rem;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   margin-right: 1rem;
 }
 
@@ -194,6 +217,7 @@ header .searchBar {
   background: var(--color-light);
   border-radius: var(--border-radius);
   padding: var(--search-padding);
+  border: 1px solid var(--color-dark);
 }
 
 header .searchBar input {
@@ -201,7 +225,7 @@ header .searchBar input {
   background: transparent;
   width: 20vw;
   margin-left: 1rem;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   color: var(--color-dark);
 }
 
@@ -224,7 +248,7 @@ header .searchBar input::placeholder {
   height: max-content;
   position: sticky;
   top: 5.4rem;
-  margin-top: 1rem;
+  margin-top: 1rem;  
 }
 
 .navbar .profile {
@@ -242,10 +266,11 @@ header .searchBar input::placeholder {
   margin-top: 1rem;
   background: var(--color-white);
   border-radius: var(--card-border-radius);
+  border: 1px solid var(--color-dark);
 }
 
 .navbar .sidebar i {
-  font-size: 1.4rem;
+  font-size: var(--font-size-big);
   color: var(--color-gray);
   margin-left: 1rem;
   position: relative;
@@ -253,7 +278,7 @@ header .searchBar input::placeholder {
 
 .navbar .sidebar i .notificationCount {
   background: var(--color-danger);
-  color: white;
+  color: var(--color-white);
   font-size: 0.7rem;
   width: fit-content;
   border-radius: 0.8rem;
@@ -307,7 +332,7 @@ input#uploadPhoto {
 
 .profileItems input {
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   border-radius: var(--border-radius);
   padding: 0 1rem;
   width: max-content;
@@ -318,8 +343,9 @@ input#uploadPhoto {
   top: 20px;
   right: 15px;
   font-family: inherit;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   font-weight: 500;
+  color: var(--color-dark);
 }
 
 .content .createPost {
@@ -356,6 +382,12 @@ input#uploadPhoto {
   margin-top: 10px;
 }
 
+.postsSubtitle {
+  text-align: center;
+  margin-top: 10px;
+
+}
+
 .post {
   background-color: var(--color-white);
   border-radius: var(--card-border-radius);
@@ -375,6 +407,10 @@ input#uploadPhoto {
   gap: 1rem;
 }
 
+.postUser .profilePicture {
+  width: 4rem;  
+}
+
 .postPhoto {
   border-radius: var(--card-border-radius);
   overflow: hidden;
@@ -383,11 +419,15 @@ input#uploadPhoto {
   object-fit: cover;
 }
 
+.postInfo span {
+  margin-right: 10px;
+}
+
 .actionButtons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: var(--font-size-big);
   margin: 0.6rem;
 }
 
@@ -414,7 +454,7 @@ input#uploadPhoto {
   text-align: center;
   background: transparent;
   width: 20vw;
-  font-size: 0.9rem;
+  font-size: var(--font-size-standart);
   color: var(--color-dark);
 }
 
@@ -428,6 +468,7 @@ input#uploadPhoto {
 
 .dialogItem {
   flex: 0 0 25%;
+  height: fit-content;
 }
 
 .dialogItemElement {
@@ -534,10 +575,10 @@ input#uploadPhoto {
   main .container {
     display: block;
     width: 87%;
+    position: relative;
   }
 
-  .content {
-  }
+  .content {}
 
   .profilePictureBlock {
     display: block;
@@ -552,7 +593,7 @@ input#uploadPhoto {
     display: grid;
     transform: rotate(-90deg);
     margin-right: 50%;
-    top: 75%; 
+    margin-top: 67vh;
   }
 
   .navbar .sidebar {
@@ -586,5 +627,68 @@ input#uploadPhoto {
 
   .post:last-of-type {
     margin-bottom: 200px;
+  }
+  
+  .messages .searchBar {
+    margin: 0;
+    max-width: none;   
+  }
+  
+  .messages .searchBar {
+    margin: 0;
+    max-width: none;   
+  }
+
+  .messages .searchBar input {
+    width: 40vw;
+  }
+
+  .dialogItemElement {
+    padding: 0;
+    border-radius: 15px;
+
+  display: flex;
+  flex-direction: column;
+  }
+
+  a.messageReceiver {
+    margin: 0;
+    
+  }
+
+  .dialogItem {
+     flex-basis: content;
+  }
+
+  .message {
+    /* border-radius: var(--border-radius); */
+    /* width: 60vw; */
+     max-width: 45vw;
+    /*min-width: 50px; */
+    height: fit-content;
+    padding: 15px;
+    margin: 10px 0;
+  }
+
+  .messagesBody {
+    margin-bottom: 33vh;
+  }
+
+  form.sendMessageForm {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnSendMessage {
+    max-width: 35vw;
+    max-height: 7vh;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+  }  
+}
+
+@media screen and (max-width: 376px) {
+  .navbar {
+    margin-top: 57vh;
   }
 }

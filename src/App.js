@@ -55,7 +55,7 @@ class App extends React.Component {
                                 <Route path='/users' element={<React.Suspense fallback={<Preloader />}><FriendsContainer /></React.Suspense>} />
                                 <Route path='/login' element={<Login />} />
                                 <Route path='/theme' element={<Theme />} />
-                                <Route path='/settings' element={<Settings />} />
+                                {/* <Route path='/settings' element={<Settings />} /> */}
                                 <Route exact path='/' element={<Navigate to={`/profile/${this.props.userId}`} />} />
                                 <Route exact path='*' element={<div>404 Page not found</div>} />
                             </Routes>

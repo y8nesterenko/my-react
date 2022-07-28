@@ -9,7 +9,7 @@
 }
 
 .menuItem:hover {
-background-color: hsl(252, 30%, 95%);
+background-color: var(--color-light);
 }
 
 .active {
@@ -19,11 +19,11 @@ background-color: hsl(252, 30%, 95%);
   cursor: pointer;
   transition: all 300ms ease;
   position: relative;
-  background-color: hsl(252, 30%, 95%);
+  background-color: var(--color-light);
 }
 
 .active i, .active h3 {
-  color: hsl(252, 75%, 60%);
+  color: var(--color-primary);
 }
 
 /* MEDIA QUERIES FAR SMALL LAPTOPS AND MOBILE PHONES */

@@ -26,6 +26,7 @@
     background-color: var(--color-light);
     padding: var(--search-padding);
     border-radius: var(--card-border-radius);
+    border: 1px solid var(--color-dark);
 }
 
 .chooseSize {
@@ -36,6 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
 }
 
 .chooseSize span {
@@ -84,6 +86,7 @@ span.fontSize5 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid var(--color-dark);
 }
 
 .chooseColor span {

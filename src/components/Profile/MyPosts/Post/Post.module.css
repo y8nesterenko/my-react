@@ -27,3 +27,60 @@ flex: 0 1 auto;
 background-color: red;
 color: #fff;
 }
+
+.showDeleteButton {
+  position: relative;
+}
+
+.showDeleteButton button {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.showDeleteButton.active button {
+  display: block;
+}
+
+.showDeleteButton i {
+  cursor: pointer;
+}
+
+.confirmDeletePost {
+  display: none;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 6;
+  color: var(--color-dark);
+}
+
+.confirmDeletePost.active {
+  display: block;
+}
+
+.confirmDeletePost span:first-child {
+display: block;
+text-align: center;
+}
+
+.confirmDeletePost button {
+  position: static;
+}
+
+.deleteButtons {
+  display: flex;
+}
+
+.btnYes {
+  padding: 0.6rem 1.6rem;
+  background-color: var(--color-primary);
+  display: inline;
+}
+
+.btnNo {
+  display: inline;
+}
